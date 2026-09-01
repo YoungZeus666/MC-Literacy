@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>我的世界之认字大冒险</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft Yahei","PingFang SC",sans-serif;}
+body{
+  min-height:100vh;
+  padding:12px;
+  color:#fff;
+}
+body.theme-grass{
+  background:#5b9a3d;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%235b9a3d'/%3E%3Crect y='60' width='80' height='20' fill='%23845f3a'/%3E%3C/svg%3E");
+}
+body.theme-iron{
+  background:#5c6570;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%235c6570'/%3E%3Crect y='60' width='80' height='20' fill='%233a4048'/%3E%3Crect x='18' y='22' width='14' height='14' fill='%23c4b59a'/%3E%3Crect x='48' y='8' width='12' height='12' fill='%239aa3ad'/%3E%3C/svg%3E");
+}
+body.theme-zombie{
+  background:#243018;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%23243018'/%3E%3Crect y='60' width='80' height='20' fill='%23151c0e'/%3E%3Crect x='10' y='18' width='16' height='16' fill='%234a5c28'/%3E%3Crect x='50' y='30' width='12' height='12' fill='%233a4a20'/%3E%3C/svg%3E");
+}
+.container{
+  max-width:480px;
+  margin:0 auto;
+  background:linear-gradient(180deg,#3d3d3d,#2c2c2c);
+  border:6px solid #222;
+  border-radius:14px;
+  padding:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+.title{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:4px;
+  color:#55ff55;
+  font-weight:bold;
+  text-shadow:2px 2px 0 #1a6b1a;
+}
+.subtitle{
+  text-align:center;
+  font-size:13px;
+  color:#aaa;
+  margin-bottom:10px;
+}
+.info-bar{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px 8px;
+  background:#222;
+  padding:8px 10px;
+  border-radius:8px;
+  margin-bottom:10px;
+  font-size:12px;
+  border:2px solid #111;
+}
+.info-bar > div{white-space:nowrap;}
+.stage-box{
+  text-align:center;
+  margin-bottom:8px;
+}
+.stage-title{
+  font-size:17px;
+  color:#88ddff;
+  font-weight:bold;
+}
+.stage-title.is-review{color:#ffe082;}
+.stage-icon{
+  font-size:13px;
+  color:#bbb;
+  margin-top:4px;
+}
+.block-area{
+  position:relative;
+  text-align:center;
+  margin-bottom:8px;
+}
+.block-wrap{
+  width:180px;
+  height:180px;
+  margin:0 auto;
+  position:relative;
+}
+.block-card{
+  width:100%;
+  height:100%;
+  border-radius:6px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:76px;
+  font-weight:bold;
+  user-select:none;
+  border:10px solid;
+}
+.block-grass{
+  background-color:#76c953;
+  background-image:linear-gradient(135deg,#84d85f,#5da83f);
+  border-color:#4c8a33;
+  color:#1c3d10;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.15), 0 6px 0 #3c6d29;
+}
+.block-iron{
+  background-color:#8e959c;
+  background-image:linear-gradient(135deg,#d5d8dc,#6f767e);
+  border-color:#4a5058;
+  color:#1c1f24;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.22), 0 6px 0 #32363c;
+}
+.block-zombie{
+  background-color:#4a5c28;
+  background-image:linear-gradient(135deg,#6b7f3a,#2c3618);
+  border-color:#1a2010;
+  color:#d7ef8a;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.08), 0 6px 0 #12160c;
+}
+.block-stage{
+  position:relative;
+  width:268px;
+  height:180px;
+  margin:0 auto;
+}
+.zombie-lane{
+  position:absolute;
+  right:0;
+  top:4px;
+  bottom:4px;
+  width:72px;
+  pointer-events:none;
+}
+.zombie-sil{
+  position:absolute;
+  width:28px;
+  height:44px;
+  opacity:.18;
+  transition:opacity .3s, transform .3s, filter .3s;
+}
+.zombie-sil.far{
+  top:6px;
+  right:32px;
+  transform:scale(.7);
+}
+.zombie-sil.mid{
+  top:58px;
+  right:14px;
+  transform:scale(.88);
+}
+.zombie-sil.close{
+  bottom:10px;
+  right:0;
+  transform:scale(1.08);
+}
+.zombie-sil.on{
+  opacity:1;
+  filter:drop-shadow(0 0 4px rgba(255,80,80,.55));
+}
+.zombie-sil.on.close{
+  filter:drop-shadow(0 0 8px rgba(255,60,60,.9));
+}
+.zombie-sil .z-head{
+  position:absolute;
+  top:0;left:6px;
+  width:16px;height:16px;
+  background:#6b8f3a;
+  border-radius:3px;
+  border:1px solid #2a3518;
+}
+.zombie-sil .z-body{
+  position:absolute;
+  top:16px;left:4px;
+  width:20px;height:22px;
+  background:#4a5c28;
+  border-radius:2px;
+  border:1px solid #2a3518;
+}
+.zombie-sil .z-leg{
+  position:absolute;
+  bottom:0;left:6px;
+  width:6px;height:8px;
+  background:#3a4a20;
+}
+.zombie-sil .z-leg.r{left:16px;}
+.pinyin-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.pinyin-text{
+  font-size:24px;
+  color:#ffe082;
+  font-weight:bold;
+  letter-spacing:1px;
+  min-width:3em;
+}
+.word-hint{
+  display:block;
+  text-align:center;
+  margin-top:6px;
+  font-size:16px;
+  color:#ffe082;
+  font-weight:bold;
+  min-height:22px;
+}
+.word-hint.is-hidden{color:#888;}
+.pinyin-text.is-hidden{color:#888;}
+.btn-speak,.btn-pinyin{
+  padding:8px 12px;
+  font-size:15px;
+  border:none;
+  border-radius:8px;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 3px 0 rgba(0,0,0,.3);
+}
+.btn-speak{background:linear-gradient(180deg,#5c6bc0,#3949ab);}
+.btn-pinyin{background:linear-gradient(180deg,#f0a020,#c47a00);}
+.btn-speak:active,.btn-pinyin:active{transform:translateY(2px);box-shadow:none;}
+.particle-container{
+  position:absolute;
+  top:0;left:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  overflow:visible;
+}
+.particle{
+  position:absolute;
+  width:14px;height:14px;
+}
+.particle-grass{background:#75c953;border:1px solid #4c8a33;}
+.particle-iron{background:#c5c9ce;border:1px solid #555;}
+.particle-zombie{background:#6b8f3a;border:1px solid #2a3518;}
+.zombie{
+  text-align:center;
+  margin-bottom:4px;
+  font-size:14px;
+  color:#ff8080;
+  min-height:20px;
+}
+.tip-text{
+  text-align:center;
+  font-size:15px;
+  min-height:40px;
+  color:#ffdd55;
+  margin-bottom:8px;
+  line-height:1.45;
+}
+
+/* ===== 村庄建造：三关共用一块画布，按关扩建 ===== */
+.house-section{
+  background:#222;
+  border-radius:10px;
+  padding:8px 8px 6px;
+  margin:4px 0 10px;
+  border:2px solid #111;
+}
+.house-title{
+  text-align:center;
+  color:#ffdd55;
+  font-size:13px;
+  margin-bottom:6px;
+  font-weight:bold;
+}
+.village-canvas{
+  position:relative;
+  width:300px;
+  height:230px;
+  margin:0 auto;
+}
+.flag-pole{
+  position:absolute;
+  top:0;
+  left:50%;
+  transform:translateX(-50%);
+  width:4px;
+  height:28px;
+  background:#6b4423;
+  opacity:0;
+  z-index:5;
+  transition:opacity .3s;
+}
+.flag-pole.on{opacity:1;}
+.flag-fill{
+  position:absolute;
+  top:4px;
+  left:calc(50% + 3px);
+  width:28px;
+  height:16px;
+  background:#e74c3c;
+  clip-path:inset(0 100% 0 0);
+  transition:clip-path .4s;
+  z-index:5;
+}
+.house-roof{
+  position:absolute;
+  top:22px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:96px solid transparent;
+  border-right:96px solid transparent;
+  border-bottom:52px solid #444;
+}
+.house-roof-fill{
+  position:absolute;
+  top:22px;
+  left:50%;
+  transform:translateX(-50%);
+  width:0;
+  height:0;
+  border-left:96px solid transparent;
+  border-right:96px solid transparent;
+  border-bottom:52px solid #c0392b;
+  clip-path:inset(0 0 100% 0);
+  transition:clip-path .4s;
+}
+.house-wall{
+  position:absolute;
+  top:72px;
+  left:50%;
+  transform:translateX(-50%);
+  width:210px;
+  height:92px;
+  background:#444;
+  border:3px solid #333;
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  grid-template-rows:repeat(3,1fr);
+  gap:3px;
+  padding:4px;
+  z-index:1;
+}
+.wall-cell{
+  background:#555;
+  border-radius:1px;
+  transition:background .3s;
+}
+.wall-cell.done{
+  background:#d48b47;
+  background-image:linear-gradient(135deg,#e09a55,#c07a3a);
+}
+.house-door{
+  position:absolute;
+  top:122px;
+  left:50%;
+  transform:translateX(-50%);
+  width:34px;
+  height:44px;
+  background:#6b4423;
+  border:2px solid #4a2f17;
+  border-radius:4px 4px 0 0;
+  z-index:2;
+}
+.house-door::after{
+  content:"";
+  position:absolute;
+  right:5px;
+  top:50%;
+  width:6px;height:6px;
+  background:#ffd700;
+  border-radius:50%;
+}
+.torch-col{
+  position:absolute;
+  top:80px;
+  display:flex;
+  flex-direction:column;
+  gap:6px;
+  z-index:3;
+}
+.torch-col.left{left:14px;}
+.torch-col.right{right:14px;}
+.torch{
+  width:12px;
+  height:24px;
+  background:#3a2a18;
+  border-radius:1px;
+  opacity:.15;
+  position:relative;
+  transition:opacity .3s;
+}
+.torch.on{
+  opacity:1;
+  background:#6b4423;
+}
+.torch.on::after{
+  content:"";
+  position:absolute;
+  top:-10px;
+  left:2px;
+  width:8px;
+  height:11px;
+  background:#ff9800;
+  border-radius:50% 50% 40% 40%;
+  box-shadow:0 0 8px #ff9800;
+}
+.path-row{
+  position:absolute;
+  top:168px;
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:4px;
+  z-index:2;
+}
+.path-stone{
+  width:18px;
+  height:12px;
+  background:#3a3a3a;
+  border-radius:2px;
+  opacity:.15;
+  transition:opacity .3s, background .3s;
+}
+.path-stone.on{
+  opacity:1;
+  background:#c4a574;
+}
+.fence-row{
+  position:absolute;
+  bottom:6px;
+  left:8px;
+  right:8px;
+  height:28px;
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  z-index:3;
+}
+.fence-post{
+  width:11px;
+  height:26px;
+  background:#3a2a18;
+  border-radius:2px 2px 0 0;
+  opacity:.15;
+  transition:opacity .3s, background .3s;
+}
+.fence-post.on{
+  opacity:1;
+  background:#8d6e63;
+  box-shadow:1px 0 0 #5d4037;
+}
+.flower-row{
+  position:absolute;
+  bottom:34px;
+  left:16px;
+  right:16px;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+  z-index:4;
+}
+.flower{
+  font-size:18px;
+  line-height:1;
+  opacity:.12;
+  transition:opacity .3s, transform .3s;
+}
+.flower.on{opacity:1;transform:scale(1.08);}
+.house-progress{
+  text-align:center;
+  font-size:12px;
+  color:#aaa;
+  margin-top:4px;
+}
+
+.btn-group{
+  display:grid;
+  gap:10px;
+  margin-bottom:10px;
+}
+.btn-group.secondary{
+  gap:8px;
+  margin-bottom:0;
+}
+.btn{
+  width:100%;
+  padding:14px;
+  font-size:18px;
+  border:none;
+  border-radius:8px;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  box-shadow:0 4px 0 rgba(0,0,0,.3);
+  transition:transform .05s;
+}
+.btn:active{transform:translateY(3px);box-shadow:none;}
+.btn:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+  transform:none;
+  box-shadow:none;
+}
+.btn-good{background:linear-gradient(180deg,#4caf50,#388e3c);}
+.btn-bad{background:linear-gradient(180deg,#ff6040,#d84315);}
+.btn-next{background:linear-gradient(180deg,#3498db,#2471a3);font-size:15px;padding:11px;}
+.btn-reset{
+  background:linear-gradient(180deg,#888,#666);
+  font-size:14px;
+  padding:10px;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  background:rgba(0,0,0,.8);
+  align-items:center;
+  justify-content:center;
+  z-index:100;
+}
+.modal.show{display:flex;}
+.modal-box{
+  background:#2c2c2c;
+  border:4px solid #55ff55;
+  border-radius:14px;
+  padding:30px 26px;
+  text-align:center;
+  max-width:360px;
+  width:90%;
+  animation:pop .3s;
+}
+@keyframes pop{
+  0%{transform:scale(.7);opacity:0;}
+  100%{transform:scale(1);opacity:1;}
+}
+.modal-box h2{color:#55ff55;margin-bottom:14px;font-size:24px;}
+.modal-box p{color:#eee;font-size:16px;margin-bottom:20px;line-height:1.6;white-space:pre-line;}
+</style>
+</head>
+<body class="theme-grass">
+<div class="container">
+  <div class="title">⛏️我的世界之认字大冒险</div>
+  <div class="subtitle">幼小衔接 · 家长陪读 · 方块识字</div>
+
+  <div class="stage-box">
+    <div class="stage-title" id="stageTitle">🌿 第一关 · 草方块入门</div>
+    <div class="stage-icon" id="stageIcon">挖开方块，读出上面的汉字</div>
+  </div>
+
+  <div class="info-bar">
+    <div>💎 <span id="gemCount" style="color:#55ff55;font-weight:bold">0</span></div>
+    <div>✅ <span id="progress" style="color:#88ddff;font-weight:bold">0/30</span></div>
+    <div>📝 <span id="missCount" style="color:#ffcc66;font-weight:bold">0</span></div>
+  </div>
+
+  <div class="block-area">
+    <div class="block-stage">
+      <div class="block-wrap">
+        <div class="block-card block-grass" id="charBlock">人</div>
+        <div class="particle-container" id="particleBox"></div>
+      </div>
+      <div class="zombie-lane" id="zombieLane" aria-label="僵尸靠近">
+        <div class="zombie-sil far"><div class="z-head"></div><div class="z-body"></div><div class="z-leg"></div><div class="z-leg r"></div></div>
+        <div class="zombie-sil mid"><div class="z-head"></div><div class="z-body"></div><div class="z-leg"></div><div class="z-leg r"></div></div>
+        <div class="zombie-sil close"><div class="z-head"></div><div class="z-body"></div><div class="z-leg"></div><div class="z-leg r"></div></div>
+      </div>
+    </div>
+    <div class="pinyin-row">
+      <button type="button" class="btn-speak" id="btnSpeak" onclick="speakAndReveal()">🔊 朗读</button>
+      <button type="button" class="btn-pinyin" id="btnPinyin" onclick="revealPinyin()">👁 看拼音</button>
+      <span class="pinyin-text is-hidden" id="pinyinText">？？？</span>
+    </div>
+    <div class="word-hint is-hidden" id="wordHint">组词：？？？</div>
+  </div>
+
+  <div class="zombie" id="zombieText"></div>
+  <div class="tip-text" id="tipText">宝贝大声读出方块上的汉字吧！</div>
+
+  <div class="btn-group" id="primaryBtns">
+    <button class="btn btn-good" id="btnGood" onclick="answerRight()">✅ 读对啦！挖方块</button>
+    <button class="btn btn-bad" id="btnBad" onclick="answerWrong()">❌ 读错了 · 僵尸前进</button>
+  </div>
+
+  <div class="house-section">
+    <div class="house-title" id="houseTitle">🏠 建造你的生存小屋</div>
+    <div class="village-canvas">
+      <div class="flag-pole" id="flagPole"></div>
+      <div class="flag-fill" id="flagFill"></div>
+      <div class="house-roof"></div>
+      <div class="house-roof-fill" id="roofFill"></div>
+      <div class="house-wall" id="houseWall"></div>
+      <div class="house-door"></div>
+      <div class="torch-col left" id="torchesLeft"></div>
+      <div class="torch-col right" id="torchesRight"></div>
+      <div class="path-row" id="pathRow"></div>
+      <div class="flower-row" id="flowerRow"></div>
+      <div class="fence-row" id="fenceRow"></div>
+    </div>
+    <div class="house-progress" id="houseProgress">小屋 0 / 30</div>
+  </div>
+
+  <div class="btn-group secondary">
+    <button class="btn btn-next" id="btnNext" onclick="nextWord()">➡️ 跳过这个字</button>
+    <button class="btn btn-reset" onclick="resetAll()">🔄 重置全部进度</button>
+  </div>
+</div>
+
+<div class="modal" id="noteModal">
+  <div class="modal-box">
+    <h2 id="noteTitle">继续冒险</h2>
+    <p id="noteText"></p>
+    <button class="btn btn-good" onclick="closeNote()">➡️ 继续</button>
+  </div>
+</div>
+
+<div class="modal" id="winModal">
+  <div class="modal-box">
+    <h2 id="winTitle">🏆 冒险完成！</h2>
+    <p id="winText">你收集了 N 颗绿宝石，太棒了冒险者！</p>
+    <button class="btn btn-good" onclick="restartGame()">🔄 再来一次</button>
+  </div>
+</div>
+
+<script>
+// ====== 音效（Web Audio生成，无需外部文件）======
+let audioCtx;
+function initAudio(){
+  if(!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+}
+function playDigSound(){
+  initAudio();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "square";
+  osc.frequency.value = 420;
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.18);
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start();osc.stop(audioCtx.currentTime+0.18);
+}
+function playGemSound(){
+  initAudio();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "sine";
+  osc.frequency.setValueAtTime(660, audioCtx.currentTime);
+  osc.frequency.setValueAtTime(880, audioCtx.currentTime+0.08);
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start();osc.stop(audioCtx.currentTime+0.25);
+}
+function playWrongSound(){
+  initAudio();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "triangle";
+  osc.frequency.value = 200;
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start();osc.stop(audioCtx.currentTime+0.25);
+}
+function playWinSound(){
+  initAudio();
+  [523,659,784,1047].forEach((freq,i)=>{
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+    osc.type = "sine";
+    osc.frequency.value = freq;
+    const t = audioCtx.currentTime + i*0.12;
+    gain.gain.setValueAtTime(0.1, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t+0.3);
+    osc.connect(gain);gain.connect(audioCtx.destination);
+    osc.start(t);osc.stop(t+0.3);
+  });
+}
+
+// ====== 拼音 + 朗读 ======
+const PINYIN = {
+  "人":"rén","口":"kǒu","手":"shǒu","足":"zú","山":"shān","水":"shuǐ","日":"rì","月":"yuè",
+  "天":"tiān","地":"dì","风":"fēng","云":"yún","雨":"yǔ","火":"huǒ","石":"shí","田":"tián",
+  "土":"tǔ","木":"mù","禾":"hé","虫":"chóng","大":"dà","小":"xiǎo","多":"duō","少":"shǎo",
+  "上":"shàng","下":"xià","左":"zuǒ","右":"yòu","来":"lái","去":"qù",
+  "白":"bái","黑":"hēi","高":"gāo","低":"dī","开":"kāi","关":"guān","出":"chū","入":"rù",
+  "飞":"fēi","马":"mǎ","牛":"niú","羊":"yáng","鱼":"yú","鸟":"niǎo","花":"huā","草":"cǎo",
+  "树":"shù","叶":"yè","星":"xīng","光":"guāng","哥":"gē","姐":"jiě","弟":"dì","妹":"mèi",
+  "爸":"bà","妈":"mā","爷":"yé","奶":"nǎi","耳":"ěr","目":"mù","书":"shū","刀":"dāo",
+  "尺":"chǐ","本":"běn","巾":"jīn",
+  "春":"chūn","夏":"xià","秋":"qiū","冬":"dōng","早":"zǎo","晚":"wǎn","明":"míng","亮":"liàng",
+  "笑":"xiào","哭":"kū","走":"zǒu","跑":"pǎo","说":"shuō","话":"huà","听":"tīng","看":"kàn",
+  "红":"hóng","绿":"lǜ","黄":"huáng","蓝":"lán"
+};
+const COMPOUND = {
+  "人":"大人","口":"口渴","手":"洗手","足":"足球","山":"大山","水":"喝水","日":"日出","月":"月亮",
+  "天":"天空","地":"土地","风":"大风","云":"白云","雨":"下雨","火":"火车","石":"石头","田":"田地",
+  "土":"土地","木":"树木","禾":"禾苗","虫":"虫子","大":"大门","小":"小朋友","多":"多少","少":"多少",
+  "上":"上面","下":"下面","左":"左边","右":"右边","来":"过来","去":"回去",
+  "白":"白云","黑":"黑色","高":"高山","低":"低头","开":"开门","关":"关门","出":"出门","入":"进入",
+  "飞":"飞机","马":"马车","牛":"牛奶","羊":"小羊","鱼":"小鱼","鸟":"小鸟","花":"花朵","草":"小草",
+  "树":"大树","叶":"叶子","星":"星星","光":"阳光","哥":"哥哥","姐":"姐姐","弟":"弟弟","妹":"妹妹",
+  "爸":"爸爸","妈":"妈妈","爷":"爷爷","奶":"奶奶","耳":"耳朵","目":"目光","书":"书本","刀":"小刀",
+  "尺":"尺子","本":"本子","巾":"毛巾",
+  "春":"春天","夏":"夏天","秋":"秋天","冬":"冬天","早":"早上","晚":"晚上","明":"明天","亮":"明亮",
+  "笑":"笑脸","哭":"哭泣","走":"走路","跑":"跑步","说":"说话","话":"说话","听":"听话","看":"看见",
+  "红":"红色","绿":"绿色","黄":"黄色","蓝":"蓝色"
+};
+let zhVoice = null;
+function loadVoices(){
+  if(!window.speechSynthesis) return;
+  const voices = speechSynthesis.getVoices();
+  zhVoice = voices.find(v => v.lang === "zh-CN")
+    || voices.find(v => (v.lang || "").toLowerCase().startsWith("zh"))
+    || null;
+}
+function speakCurrent(){
+  const ch = currentChar();
+  if(!ch || !window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(ch);
+  u.lang = "zh-CN";
+  u.rate = 0.75;
+  if(zhVoice) u.voice = zhVoice;
+  speechSynthesis.speak(u);
+}
+function revealPinyin(){
+  pinyinRevealed = true;
+  const ch = currentChar();
+  dom.pinyinText.innerText = PINYIN[ch] || "";
+  dom.pinyinText.classList.remove("is-hidden");
+  dom.wordHint.innerText = "组词：" + (COMPOUND[ch] || "");
+  dom.wordHint.classList.remove("is-hidden");
+}
+function speakAndReveal(){
+  revealPinyin();
+  speakCurrent();
+}
+if(window.speechSynthesis){
+  loadVoices();
+  speechSynthesis.addEventListener("voiceschanged", loadVoices);
+}
+
+// ====== 生字库 ======
+const levels = [
+  { name:"🌿 第一关 · 草方块入门", icon:"挖开方块读出汉字", skin:"grass", words:["人","口","手","足","山","水","日","月","天","地","风","云","雨","火","石","田","土","木","禾","虫","大","小","多","少","上","下","左","右","来","去"] },
+  { name:"⛏️ 第二关 · 铁矿层进阶", icon:"读出汉字挖到铁矿", skin:"iron", words:["白","黑","高","低","开","关","出","入","飞","马","牛","羊","鱼","鸟","花","草","树","叶","星","光","哥","姐","弟","妹","爸","妈","爷","奶","耳","目","书","刀","尺","本","巾"] },
+  { name:"👹 第三关 · 汉字僵尸大作战", icon:"读对击退僵尸，错字进错题本", skin:"zombie", words:["春","夏","秋","冬","早","晚","明","亮","笑","哭","走","跑","说","话","听","看","红","绿","黄","蓝"] }
+];
+const SKINS = ["grass","iron","zombie"];
+const AUTO_NEXT_MS = 900;
+
+// ====== 本地存储 ======
+const STORAGE_KEY = "mc_read_game_v2";
+function saveState(){
+  const state = {
+    gem:gem,
+    currentLevel:currentLevel,
+    index:index,
+    missed:missed,
+    inReview:inReview,
+    reviewList:reviewList,
+    reviewIndex:reviewIndex,
+    resumeIndex:resumeIndex,
+    pendingLevelUp:pendingLevelUp,
+    build:build
+  };
+  try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(raw){
+      const s = JSON.parse(raw);
+      if(typeof s.gem === "number") gem = s.gem;
+      if(typeof s.currentLevel === "number" && s.currentLevel < levels.length) currentLevel = s.currentLevel;
+      if(typeof s.index === "number") index = s.index;
+      if(Array.isArray(s.missed)) missed = s.missed.filter(function(ch){ return typeof ch === "string" && ch.length === 1; });
+      if(Array.isArray(s.reviewList)) reviewList = s.reviewList.filter(function(ch){ return typeof ch === "string" && ch.length === 1; });
+      if(typeof s.reviewIndex === "number") reviewIndex = s.reviewIndex;
+      if(typeof s.resumeIndex === "number") resumeIndex = s.resumeIndex;
+      if(typeof s.pendingLevelUp === "boolean") pendingLevelUp = s.pendingLevelUp;
+      loadBuild(s);
+      if(s.inReview && reviewList.length){
+        inReview = true;
+        if(reviewIndex >= reviewList.length) reviewIndex = 0;
+      }else{
+        inReview = false;
+        pendingLevelUp = false;
+      }
+    }
+  }catch(e){}
+}
+
+// ====== 游戏状态 ======
+let currentLevel = 0;
+let wordList = levels[0].words;
+let gem = 0;
+let zombieStep = 0;
+let index = 0;
+let answered = false;
+let autoNextTimer = null;
+let pinyinRevealed = false;
+let missed = [];
+let inReview = false;
+let reviewList = [];
+let reviewIndex = 0;
+let resumeIndex = 0;
+let pendingLevelUp = false;
+let build = [0, 0, 0];
+const CHAPTERS = [
+  { title:"🏠 建造你的生存小屋", short:"小屋", done:"🏠 小屋建成！" },
+  { title:"🌿 给小屋围上院子", short:"院子", done:"🌿 院子围好了！" },
+  { title:"🔥 点亮火把，守夜", short:"守夜", done:"🔥 村庄守夜完成！" }
+];
+function chapterMax(i){
+  return levels[i].words.length;
+}
+const HUT_WALL = 18;
+const YARD_PATH = 8;
+const YARD_FENCE = 15;
+const YARD_FLOWER = 12;
+const NIGHT_TORCH = 8;
+const FLOWER_EMOJI = ["🌸","🌼","🌺","🌷","🌼","🌸","🌻","💮","🌸","🌼","🌺","🌷"];
+
+const dom = {
+  stageTitle: document.getElementById("stageTitle"),
+  stageIcon: document.getElementById("stageIcon"),
+  gemCount: document.getElementById("gemCount"),
+  zombieLane: document.getElementById("zombieLane"),
+  progress: document.getElementById("progress"),
+  missCount: document.getElementById("missCount"),
+  charBlock: document.getElementById("charBlock"),
+  pinyinText: document.getElementById("pinyinText"),
+  wordHint: document.getElementById("wordHint"),
+  zombieText: document.getElementById("zombieText"),
+  tipText: document.getElementById("tipText"),
+  winModal: document.getElementById("winModal"),
+  winTitle: document.getElementById("winTitle"),
+  winText: document.getElementById("winText"),
+  particleBox: document.getElementById("particleBox"),
+  houseWall: document.getElementById("houseWall"),
+  roofFill: document.getElementById("roofFill"),
+  houseTitle: document.getElementById("houseTitle"),
+  houseProgress: document.getElementById("houseProgress"),
+  flagPole: document.getElementById("flagPole"),
+  flagFill: document.getElementById("flagFill"),
+  torchesLeft: document.getElementById("torchesLeft"),
+  torchesRight: document.getElementById("torchesRight"),
+  pathRow: document.getElementById("pathRow"),
+  flowerRow: document.getElementById("flowerRow"),
+  fenceRow: document.getElementById("fenceRow"),
+  btnGood: document.getElementById("btnGood"),
+  btnBad: document.getElementById("btnBad"),
+  btnNext: document.getElementById("btnNext"),
+  noteModal: document.getElementById("noteModal"),
+  noteTitle: document.getElementById("noteTitle"),
+  noteText: document.getElementById("noteText")
+};
+
+function currentSkin(){
+  return levels[currentLevel].skin || "grass";
+}
+function currentChar(){
+  if(inReview) return reviewList[reviewIndex] || "";
+  return wordList[index] || "";
+}
+function addMissed(ch){
+  if(ch && missed.indexOf(ch) < 0) missed.push(ch);
+}
+function removeMissed(ch){
+  missed = missed.filter(function(c){ return c !== ch; });
+}
+
+function applySkin(){
+  const skin = currentSkin();
+  SKINS.forEach(name => {
+    document.body.classList.toggle("theme-" + name, name === skin);
+    dom.charBlock.classList.toggle("block-" + name, name === skin);
+  });
+}
+
+function clearAutoNext(){
+  if(autoNextTimer){
+    clearTimeout(autoNextTimer);
+    autoNextTimer = null;
+  }
+}
+
+function setAnswerLocked(locked){
+  answered = locked;
+  dom.btnGood.disabled = locked;
+  dom.btnBad.disabled = locked;
+  dom.btnNext.disabled = locked;
+}
+
+let noteAfter = null;
+let skipEnterModal = false;
+const LEVEL_ENTER = [
+  null,
+  { title:"⛏️ 铁矿层开了！", text:"小屋还在。接下来给它围上院子吧！" },
+  { title:"👹 僵尸夜开始了！", text:"点亮火把，守住我们的家！" }
+];
+function showNote(title, text, after){
+  noteAfter = after || null;
+  dom.noteTitle.innerText = title;
+  dom.noteText.innerText = text;
+  dom.noteModal.classList.add("show");
+}
+function closeNote(){
+  dom.noteModal.classList.remove("show");
+  const fn = noteAfter;
+  noteAfter = null;
+  if(fn) fn();
+}
+function willLevelUpAfterThis(){
+  if(inReview){
+    return pendingLevelUp && reviewIndex >= reviewList.length - 1;
+  }
+  return index >= wordList.length - 1 && missed.length === 0;
+}
+function combinedClearText(){
+  if(currentLevel === 0){
+    return { title:"🏠 小屋建成！", text:"太棒了！接下来进入铁矿层，给小屋围上院子。" };
+  }
+  if(currentLevel === 1){
+    return { title:"🌿 院子围好了！", text:"夜晚快到了。进入第三关，点亮火把守夜！" };
+  }
+  return { title:"🔥 村庄守夜完成！", text:"你把家守得很好，继续把剩下的字读完吧！" };
+}
+
+function fillKids(el, count, className, labels){
+  el.innerHTML = "";
+  for(let i=0;i<count;i++){
+    const div = document.createElement("div");
+    div.className = className;
+    if(labels) div.innerText = labels[i];
+    el.appendChild(div);
+  }
+}
+function toggleOn(nodes, filled){
+  for(let i=0;i<nodes.length;i++){
+    if(i < filled) nodes[i].classList.add("on");
+    else nodes[i].classList.remove("on");
+  }
+}
+function loadBuild(s){
+  if(Array.isArray(s.build) && s.build.length >= 3){
+    build = [0,1,2].map(function(i){
+      const n = s.build[i];
+      if(typeof n !== "number" || n < 0) return 0;
+      return Math.min(Math.floor(n), chapterMax(i));
+    });
+    return;
+  }
+  let rest = typeof s.gem === "number" ? s.gem : 0;
+  build = [0, 0, 0];
+  const unlocked = Math.min(currentLevel, 2);
+  for(let i=0;i<=unlocked;i++){
+    build[i] = Math.min(Math.max(0, rest), chapterMax(i));
+    rest -= build[i];
+  }
+}
+function addBuild(){
+  const cap = chapterMax(currentLevel);
+  if(build[currentLevel] < cap) build[currentLevel] += 1;
+}
+
+function initVillage(){
+  fillKids(dom.houseWall, HUT_WALL, "wall-cell");
+  fillKids(dom.pathRow, YARD_PATH, "path-stone");
+  fillKids(dom.fenceRow, YARD_FENCE, "fence-post");
+  fillKids(dom.flowerRow, YARD_FLOWER, "flower", FLOWER_EMOJI);
+  fillKids(dom.torchesLeft, NIGHT_TORCH / 2, "torch");
+  fillKids(dom.torchesRight, NIGHT_TORCH / 2, "torch");
+}
+
+function renderVillage(){
+  const hutMax = chapterMax(0);
+  const hut = Math.min(build[0], hutMax);
+  const wallFilled = Math.min(hut, HUT_WALL);
+  const roofMax = Math.max(1, hutMax - HUT_WALL);
+  const roofFilled = Math.max(0, hut - HUT_WALL);
+  const cells = dom.houseWall.querySelectorAll(".wall-cell");
+  for(let i=0;i<cells.length;i++){
+    if(i < wallFilled) cells[i].classList.add("done");
+    else cells[i].classList.remove("done");
+  }
+  dom.roofFill.style.clipPath = "inset(" + ((1 - Math.min(roofFilled / roofMax, 1)) * 100) + "% 0 0 0)";
+
+  const yardMax = chapterMax(1);
+  const yard = Math.min(build[1], yardMax);
+  const pathFilled = Math.min(yard, YARD_PATH);
+  const fenceFilled = Math.min(Math.max(0, yard - YARD_PATH), YARD_FENCE);
+  const flowerFilled = Math.min(Math.max(0, yard - YARD_PATH - YARD_FENCE), YARD_FLOWER);
+  toggleOn(dom.pathRow.querySelectorAll(".path-stone"), pathFilled);
+  toggleOn(dom.fenceRow.querySelectorAll(".fence-post"), fenceFilled);
+  toggleOn(dom.flowerRow.querySelectorAll(".flower"), flowerFilled);
+
+  const nightMax = chapterMax(2);
+  const night = Math.min(build[2], nightMax);
+  const torchFilled = Math.min(night, NIGHT_TORCH);
+  const flagMax = Math.max(1, nightMax - NIGHT_TORCH);
+  const flagFilled = Math.min(Math.max(0, night - NIGHT_TORCH), flagMax);
+  const leftTorches = dom.torchesLeft.querySelectorAll(".torch");
+  const rightTorches = dom.torchesRight.querySelectorAll(".torch");
+  const perSide = NIGHT_TORCH / 2;
+  toggleOn(leftTorches, Math.min(torchFilled, perSide));
+  toggleOn(rightTorches, Math.max(0, torchFilled - perSide));
+  if(night > 0){
+    dom.flagPole.classList.add("on");
+  }else{
+    dom.flagPole.classList.remove("on");
+  }
+  const flagPercent = Math.min(flagFilled / flagMax, 1);
+  dom.flagFill.style.clipPath = "inset(0 " + ((1 - flagPercent) * 100) + "% 0 0)";
+
+  const ch = CHAPTERS[currentLevel];
+  const max = chapterMax(currentLevel);
+  const n = Math.min(build[currentLevel], max);
+  dom.houseTitle.innerText = ch.title;
+  if(n >= max){
+    dom.houseProgress.innerText = ch.done;
+  }else{
+    dom.houseProgress.innerText = ch.short + " " + n + " / " + max;
+  }
+}
+
+function createParticles(){
+  const count = 14;
+  const skinClass = "particle-" + currentSkin();
+  for(let i=0;i<count;i++){
+    const p = document.createElement("div");
+    p.className = "particle " + skinClass;
+    dom.particleBox.appendChild(p);
+    const startX = 50 + Math.random()*80;
+    const startY = 50 + Math.random()*80;
+    const vx = (Math.random()-0.5)*8;
+    const vy = -(Math.random()*5 + 2);
+    p.style.left = startX+"px";
+    p.style.top = startY+"px";
+    let t = 0;
+    const gravity = 0.3;
+    let curVy = vy;
+    const step = ()=>{
+      t++;
+      curVy += gravity;
+      p.style.left = (parseFloat(p.style.left)+vx)+"px";
+      p.style.top = (parseFloat(p.style.top)+curVy)+"px";
+      p.style.opacity = 1 - t/32;
+      if(t < 32){
+        requestAnimationFrame(step);
+      }else{
+        p.remove();
+      }
+    };
+    requestAnimationFrame(step);
+  }
+}
+
+function renderZombies(){
+  const sils = dom.zombieLane.querySelectorAll(".zombie-sil");
+  for(let i=0;i<sils.length;i++){
+    sils[i].classList.toggle("on", zombieStep > i);
+  }
+}
+function lastRunSummary(){
+  const names = ["小屋","院子","守夜"];
+  const done = [];
+  const mid = [];
+  for(let i=0;i<3;i++){
+    const max = chapterMax(i);
+    if(build[i] >= max) done.push(names[i]);
+    else if(build[i] > 0) mid.push(names[i] + " " + build[i] + "/" + max);
+  }
+  let s = "上轮：";
+  if(done.length) s += done.join("、") + "都齐了";
+  if(mid.length) s += (done.length ? "；" : "") + mid.join("、") + "还在建";
+  if(!done.length && !mid.length) s += "还没开工";
+  s += "。\n再来一次会新开一座空村，绿宝石从 0 再攒。";
+  return s;
+}
+
+function refreshUI(){
+  const ch = currentChar();
+  dom.gemCount.innerText = gem;
+  renderZombies();
+  dom.missCount.innerText = missed.length;
+  dom.charBlock.innerText = ch;
+  if(pinyinRevealed){
+    dom.pinyinText.innerText = PINYIN[ch] || "";
+    dom.pinyinText.classList.remove("is-hidden");
+    dom.wordHint.innerText = "组词：" + (COMPOUND[ch] || "");
+    dom.wordHint.classList.remove("is-hidden");
+  }else{
+    dom.pinyinText.innerText = "？？？";
+    dom.pinyinText.classList.add("is-hidden");
+    dom.wordHint.innerText = "组词：？？？";
+    dom.wordHint.classList.add("is-hidden");
+  }
+  if(inReview){
+    dom.stageTitle.innerText = "📖 错题复习";
+    dom.stageTitle.classList.add("is-review");
+    dom.stageIcon.innerText = "读对就移出错题本，不会清掉本关进度";
+    dom.progress.innerText = "复习 " + (reviewIndex+1) + "/" + reviewList.length;
+  }else{
+    dom.stageTitle.innerText = levels[currentLevel].name;
+    dom.stageTitle.classList.remove("is-review");
+    dom.stageIcon.innerText = levels[currentLevel].icon;
+    dom.progress.innerText = build[currentLevel] + "/" + chapterMax(currentLevel);
+  }
+  renderVillage();
+}
+
+function setStage(){
+  clearAutoNext();
+  setAnswerLocked(false);
+  pinyinRevealed = false;
+  applySkin();
+  wordList = levels[currentLevel].words;
+  if(!inReview && index >= wordList.length) index = 0;
+  if(!inReview){
+    dom.tipText.innerText = "宝贝大声读出方块上的汉字吧！";
+    dom.zombieText.innerText = "";
+  }
+  refreshUI();
+}
+
+function startReview(pendingUp){
+  if(pendingUp) pendingLevelUp = true;
+  if(missed.length === 0){
+    zombieStep = 0;
+    inReview = false;
+    if(pendingLevelUp){
+      pendingLevelUp = false;
+      goToNextLevelOrWin();
+    }else{
+      refreshUI();
+    }
+    return;
+  }
+  inReview = true;
+  reviewList = missed.slice();
+  reviewIndex = 0;
+  resumeIndex = index;
+  zombieStep = 0;
+  pinyinRevealed = false;
+  clearAutoNext();
+  setAnswerLocked(false);
+  refreshUI();
+  dom.tipText.innerText = pendingLevelUp
+    ? "📖 过关前先把错题再读一遍！"
+    : "👹 僵尸来了！先把读错的字再练一遍！";
+  dom.zombieText.innerText = "";
+  saveState();
+}
+
+function goToNextLevelOrWin(){
+  pinyinRevealed = false;
+  if(currentLevel < levels.length - 1){
+    currentLevel += 1;
+    index = 0;
+    inReview = false;
+    saveState();
+    setStage();
+    if(skipEnterModal){
+      skipEnterModal = false;
+      dom.tipText.innerText = "🎉 太棒了！进入" + levels[currentLevel].name + "！";
+      return;
+    }
+    const info = LEVEL_ENTER[currentLevel];
+    showNote(info.title, info.text);
+    return;
+  }
+  setAnswerLocked(true);
+  dom.winTitle.innerText = "🏆 冒险完成！";
+  dom.winText.innerText = "你一共收集了 " + gem + " 颗绿宝石！\n你是一位超级识字冒险家！\n" + lastRunSummary();
+  dom.winModal.classList.add("show");
+  playWinSound();
+}
+
+function finishReview(){
+  inReview = false;
+  const pending = pendingLevelUp;
+  pendingLevelUp = false;
+  reviewList = [];
+  reviewIndex = 0;
+  pinyinRevealed = false;
+  zombieStep = 0;
+  if(pending){
+    goToNextLevelOrWin();
+    return;
+  }
+  index = resumeIndex;
+  if(index >= wordList.length){
+    if(missed.length > 0){
+      startReview(true);
+      return;
+    }
+    goToNextLevelOrWin();
+    return;
+  }
+  if(missed.indexOf(wordList[index]) < 0){
+    index += 1;
+    if(index >= wordList.length){
+      if(missed.length > 0){
+        startReview(true);
+        return;
+      }
+      goToNextLevelOrWin();
+      return;
+    }
+  }
+  saveState();
+  refreshUI();
+  dom.tipText.innerText = "继续冒险吧！读出方块上的汉字！";
+  dom.zombieText.innerText = "";
+}
+
+function answerRight(){
+  if(answered) return;
+  setAnswerLocked(true);
+  const ch = currentChar();
+  removeMissed(ch);
+  const cap = chapterMax(currentLevel);
+  const was = build[currentLevel];
+  gem += 1;
+  addBuild();
+  const justFinished = was < cap && build[currentLevel] >= cap;
+  const levelUp = willLevelUpAfterThis();
+  zombieStep = 0;
+  dom.tipText.innerText = "✅ 咔嚓！方块挖开！+1 颗绿宝石，马上进入下一个…";
+  dom.zombieText.innerText = "";
+  createParticles();
+  playDigSound();
+  setTimeout(()=>playGemSound(),120);
+  speakCurrent();
+  saveState();
+  refreshUI();
+  autoNextTimer = setTimeout(function(){
+    autoNextTimer = null;
+    if(justFinished && levelUp && currentLevel < levels.length - 1){
+      const msg = combinedClearText();
+      skipEnterModal = true;
+      showNote(msg.title, msg.text, function(){ nextWord(); });
+    }else if(justFinished){
+      showNote(CHAPTERS[currentLevel].done, "读对的字都变成了村庄里的一块砖，继续加油！", function(){ nextWord(); });
+    }else if(levelUp && currentLevel < levels.length - 1){
+      skipEnterModal = true;
+      const next = currentLevel + 1;
+      showNote("🎉 进入" + levels[next].name, "还有没盖完的部分，下一关可以继续扩建。", function(){ nextWord(); });
+    }else{
+      nextWord();
+    }
+  }, AUTO_NEXT_MS);
+}
+
+function answerWrong(){
+  if(answered) return;
+  addMissed(currentChar());
+  zombieStep += 1;
+  dom.zombieText.innerText = "👹 汉字僵尸向前走一步！";
+  playWrongSound();
+  if(zombieStep >= 3){
+    startReview(false);
+    return;
+  }
+  dom.tipText.innerText = "❌ 再读一次试试，一定能行！";
+  saveState();
+  refreshUI();
+}
+
+function nextWord(){
+  clearAutoNext();
+  setAnswerLocked(false);
+  pinyinRevealed = false;
+  if(inReview){
+    reviewIndex += 1;
+    if(reviewIndex >= reviewList.length){
+      finishReview();
+      return;
+    }
+    saveState();
+    refreshUI();
+    return;
+  }
+  index += 1;
+  if(index >= wordList.length){
+    if(missed.length > 0){
+      startReview(true);
+      return;
+    }
+    goToNextLevelOrWin();
+    return;
+  }
+  dom.tipText.innerText = "宝贝大声读出方块上的汉字吧！";
+  dom.zombieText.innerText = "";
+  saveState();
+  refreshUI();
+}
+
+function restartGame(){
+  clearAutoNext();
+  dom.winModal.classList.remove("show");
+  if(dom.noteModal) dom.noteModal.classList.remove("show");
+  noteAfter = null;
+  skipEnterModal = false;
+  currentLevel = 0;
+  index = 0;
+  gem = 0;
+  zombieStep = 0;
+  missed = [];
+  inReview = false;
+  reviewList = [];
+  reviewIndex = 0;
+  pendingLevelUp = false;
+  pinyinRevealed = false;
+  build = [0, 0, 0];
+  saveState();
+  setStage();
+  dom.tipText.innerText = "新一轮冒险开始，加油冒险者！";
+}
+
+function resetAll(){
+  if(confirm("确定要重置全部进度吗？绿宝石和村庄建造都会清零哦！")){
+    clearAutoNext();
+    gem = 0;
+    currentLevel = 0;
+    index = 0;
+    zombieStep = 0;
+    missed = [];
+    inReview = false;
+    reviewList = [];
+    reviewIndex = 0;
+    pendingLevelUp = false;
+    pinyinRevealed = false;
+    build = [0, 0, 0];
+    noteAfter = null;
+    skipEnterModal = false;
+    if(dom.noteModal) dom.noteModal.classList.remove("show");
+    try{ localStorage.removeItem(STORAGE_KEY); }catch(e){}
+    setStage();
+    dom.tipText.innerText = "进度已重置，新的冒险开始！";
+  }
+}
+
+initVillage();
+loadState();
+wordList = levels[currentLevel].words;
+if(index >= wordList.length) index = 0;
+setStage();
+</script>
+</body>
+</html>
