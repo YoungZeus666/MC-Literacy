@@ -35,13 +35,7 @@
 
 ## 运行方式
 
-没有构建步骤，也没有依赖。
-
-```bash
-open index.html
-# 或
-python3 -m http.server 8080
-```
+没有构建步骤，也没有依赖。用浏览器打开 [`index.html`](./index.html) 即可。
 
 页面按约 480px 宽的卡片适配手机。挖方块音效用 Web Audio 合成，汉字朗读用系统 `speechSynthesis`；都需要先点一次按钮（浏览器自动播放策略）。
 

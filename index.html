@@ -23,6 +23,30 @@ body.theme-zombie{
   background:#243018;
   background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%23243018'/%3E%3Crect y='60' width='80' height='20' fill='%23151c0e'/%3E%3Crect x='10' y='18' width='16' height='16' fill='%234a5c28'/%3E%3Crect x='50' y='30' width='12' height='12' fill='%233a4a20'/%3E%3C/svg%3E");
 }
+body.theme-stone{
+  background:#6b6b6b;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%236b6b6b'/%3E%3Crect y='60' width='80' height='20' fill='%234a4a4a'/%3E%3Crect x='12' y='15' width='16' height='16' fill='%23999999'/%3E%3Crect x='50' y='22' width='14' height='14' fill='%23888888'/%3E%3C/svg%3E");
+}
+body.theme-sand{
+  background:#d4b86a;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%23d4b86a'/%3E%3Crect y='60' width='80' height='20' fill='%23b8a050'/%3E%3Crect x='20' y='10' width='12' height='12' fill='%23e8d48a'/%3E%3Crect x='55' y='18' width='10' height='10' fill='%23e0c878'/%3E%3C/svg%3E");
+}
+body.theme-emerald{
+  background:#2d7d46;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%232d7d46'/%3E%3Crect y='60' width='80' height='20' fill='%231a5a30'/%3E%3Crect x='15' y='12' width='14' height='14' fill='%2355ddaa'/%3E%3Crect x='48' y='22' width='12' height='12' fill='%2344cc99'/%3E%3C/svg%3E");
+}
+body.theme-redstone{
+  background:#6b2020;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%236b2020'/%3E%3Crect y='60' width='80' height='20' fill='%234a1010'/%3E%3Crect x='18' y='14' width='12' height='12' fill='%23ff4444'/%3E%3Crect x='50' y='24' width='10' height='10' fill='%23cc2222'/%3E%3C/svg%3E");
+}
+body.theme-diamond{
+  background:#2a6b8a;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%232a6b8a'/%3E%3Crect y='60' width='80' height='20' fill='%231a4a60'/%3E%3Crect x='16' y='12' width='14' height='14' fill='%2388ddff'/%3E%3Crect x='50' y='22' width='12' height='12' fill='%2366ccff'/%3E%3C/svg%3E");
+}
+body.theme-obsidian{
+  background:#1a0a2e;
+  background-image:url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Crect width='80' height='80' fill='%231a0a2e'/%3E%3Crect y='60' width='80' height='20' fill='%23100820'/%3E%3Crect x='15' y='12' width='14' height='14' fill='%235a2aaa'/%3E%3Crect x='48' y='22' width='12' height='12' fill='%234a1a88'/%3E%3C/svg%3E");
+}
 .container{
   max-width:480px;
   margin:0 auto;
@@ -118,72 +142,54 @@ body.theme-zombie{
   color:#d7ef8a;
   box-shadow:inset 0 0 0 4px rgba(255,255,255,.08), 0 6px 0 #12160c;
 }
+.block-stone{
+  background-color:#888;
+  background-image:linear-gradient(135deg,#aaa,#707070);
+  border-color:#505050;
+  color:#1a1a1a;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.12), 0 6px 0 #505050;
+}
+.block-sand{
+  background-color:#e8d48a;
+  background-image:linear-gradient(135deg,#f5e8b0,#d4b860);
+  border-color:#b8a050;
+  color:#4a3a10;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.2), 0 6px 0 #a09040;
+}
+.block-emerald{
+  background-color:#44cc88;
+  background-image:linear-gradient(135deg,#66eeaa,#2aaa66);
+  border-color:#1a7040;
+  color:#0a3018;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.25), 0 6px 0 #1a6030;
+}
+.block-redstone{
+  background-color:#cc3333;
+  background-image:linear-gradient(135deg,#ee5555,#aa2222);
+  border-color:#701010;
+  color:#fff0e0;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.2), 0 6px 0 #601010;
+}
+.block-diamond{
+  background-color:#44bbdd;
+  background-image:linear-gradient(135deg,#88eeff,#2299bb);
+  border-color:#106080;
+  color:#0a3040;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.3), 0 6px 0 #105060;
+}
+.block-obsidian{
+  background-color:#2a1050;
+  background-image:linear-gradient(135deg,#4a2088,#1a0830);
+  border-color:#0a0418;
+  color:#c8a8ff;
+  box-shadow:inset 0 0 0 4px rgba(255,255,255,.08), 0 6px 0 #0a0418;
+}
 .block-stage{
   position:relative;
   width:268px;
   height:180px;
   margin:0 auto;
 }
-.zombie-lane{
-  position:absolute;
-  right:0;
-  top:4px;
-  bottom:4px;
-  width:72px;
-  pointer-events:none;
-}
-.zombie-sil{
-  position:absolute;
-  width:28px;
-  height:44px;
-  opacity:.18;
-  transition:opacity .3s, transform .3s, filter .3s;
-}
-.zombie-sil.far{
-  top:6px;
-  right:32px;
-  transform:scale(.7);
-}
-.zombie-sil.mid{
-  top:58px;
-  right:14px;
-  transform:scale(.88);
-}
-.zombie-sil.close{
-  bottom:10px;
-  right:0;
-  transform:scale(1.08);
-}
-.zombie-sil.on{
-  opacity:1;
-  filter:drop-shadow(0 0 4px rgba(255,80,80,.55));
-}
-.zombie-sil.on.close{
-  filter:drop-shadow(0 0 8px rgba(255,60,60,.9));
-}
-.zombie-sil .z-head{
-  position:absolute;
-  top:0;left:6px;
-  width:16px;height:16px;
-  background:#6b8f3a;
-  border-radius:3px;
-  border:1px solid #2a3518;
-}
-.zombie-sil .z-body{
-  position:absolute;
-  top:16px;left:4px;
-  width:20px;height:22px;
-  background:#4a5c28;
-  border-radius:2px;
-  border:1px solid #2a3518;
-}
-.zombie-sil .z-leg{
-  position:absolute;
-  bottom:0;left:6px;
-  width:6px;height:8px;
-  background:#3a4a20;
-}
-.zombie-sil .z-leg.r{left:16px;}
 .pinyin-row{
   display:flex;
   align-items:center;
@@ -237,6 +243,12 @@ body.theme-zombie{
 .particle-grass{background:#75c953;border:1px solid #4c8a33;}
 .particle-iron{background:#c5c9ce;border:1px solid #555;}
 .particle-zombie{background:#6b8f3a;border:1px solid #2a3518;}
+.particle-stone{background:#aaa;border:1px solid #666;}
+.particle-sand{background:#f0d888;border:1px solid #b8a050;}
+.particle-emerald{background:#55ddaa;border:1px solid #1a7040;}
+.particle-redstone{background:#ee5555;border:1px solid #701010;}
+.particle-diamond{background:#88eeff;border:1px solid #106080;}
+.particle-obsidian{background:#6a30cc;border:1px solid #0a0418;}
 .zombie{
   text-align:center;
   margin-bottom:4px;
@@ -244,6 +256,115 @@ body.theme-zombie{
   color:#ff8080;
   min-height:20px;
 }
+/* 边缘红光闪烁（答错/僵尸靠近时） */
+.danger-flash{
+  position:fixed;
+  top:0;left:0;right:0;bottom:0;
+  pointer-events:none;
+  z-index:50;
+  box-shadow:inset 0 0 80px 20px rgba(255,0,0,.35);
+  opacity:0;
+  transition:opacity .15s;
+}
+.danger-flash.on{
+  opacity:1;
+  animation:danger-pulse .4s ease-out;
+}
+@keyframes danger-pulse{
+  0%{opacity:1;}
+  100%{opacity:0;}
+}
+/* 僵尸波次进度条 */
+.wave-bar-wrap{
+  background:#222;
+  border-radius:6px;
+  height:18px;
+  margin:0 0 8px;
+  overflow:hidden;
+  border:2px solid #111;
+  position:relative;
+}
+.wave-bar-fill{
+  height:100%;
+  background:linear-gradient(90deg,#ff4444,#ff2222,#cc0000);
+  transition:width .35s;
+  border-radius:4px;
+}
+.wave-bar-label{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+  font-weight:bold;
+  color:#fff;
+  text-shadow:0 0 4px rgba(0,0,0,.8);
+}
+/* 炮塔区域 */
+.turret-section{
+  background:#222;
+  border-radius:8px;
+  padding:6px 8px;
+  margin:4px 0 8px;
+  border:2px solid #111;
+  display:none;
+}
+.turret-section.on{display:block;}
+.turret-title{
+  text-align:center;
+  color:#ffdd55;
+  font-size:12px;
+  margin-bottom:4px;
+}
+.turret-row{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+.turret-icon{
+  width:24px;height:24px;
+  background:#777;
+  border:2px solid #555;
+  border-radius:3px;
+  position:relative;
+  transition:background .3s;
+}
+.turret-icon.built{
+  background:#5a8a3a;
+  border-color:#3a5a2a;
+}
+.turret-icon.built::after{
+  content:"";
+  position:absolute;
+  top:3px;left:3px;
+  width:6px;height:6px;
+  background:#ff4444;
+  border-radius:50%;
+  box-shadow:0 0 3px #ff4444;
+}
+.turret-empty{
+  width:24px;height:24px;
+  background:#333;
+  border:2px dashed #555;
+  border-radius:3px;
+  opacity:.5;
+}
+.btn-turret{
+  padding:4px 10px;
+  font-size:12px;
+  border:none;
+  border-radius:6px;
+  color:#fff;
+  font-weight:bold;
+  cursor:pointer;
+  background:linear-gradient(180deg,#e67e22,#b85c0c);
+  box-shadow:0 3px 0 rgba(0,0,0,.3);
+}
+.btn-turret:active{transform:translateY(2px);box-shadow:none;}
+.btn-turret:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none;}
 .tip-text{
   text-align:center;
   font-size:15px;
@@ -464,6 +585,274 @@ body.theme-zombie{
   transition:opacity .3s, transform .3s;
 }
 .flower.on{opacity:1;transform:scale(1.08);}
+/* 铁栅栏（第4关） */
+.iron-bars{
+  position:absolute;
+  top:76px;left:50%;
+  transform:translateX(-50%);
+  width:220px;height:86px;
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:2px;
+  padding:2px 4px;
+  pointer-events:none;
+  z-index:5;
+}
+.iron-bar{
+  width:100%;height:100%;
+  background:#aaa;
+  border:1px solid #666;
+  border-radius:1px;
+  opacity:.12;
+  transition:opacity .3s, background .3s;
+}
+.iron-bar.on{opacity:1;background:#c4c9ce;box-shadow:0 0 2px rgba(200,200,200,.5);}
+/* 绿宝石（第5关） */
+.emerald-gems{
+  position:absolute;
+  top:18px;left:50%;
+  transform:translateX(-50%);
+  width:220px;height:60px;
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:2px;
+  padding:2px 4px;
+  pointer-events:none;
+  z-index:6;
+}
+.emerald-gem{
+  width:100%;height:100%;
+  background:#2a8a4a;
+  border:2px solid #1a5a2a;
+  border-radius:2px;
+  opacity:.12;
+  transition:opacity .3s, transform .3s;
+}
+.emerald-gem.on{opacity:1;transform:scale(1.15);box-shadow:0 0 6px rgba(80,220,120,.6);}
+/* 红石灯（第6关） */
+.redstone-lamps{
+  position:absolute;
+  top:80px;left:50%;
+  transform:translateX(-50%);
+  width:220px;height:80px;
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:4px;
+  padding:4px;
+  pointer-events:none;
+  z-index:5;
+}
+.redstone-lamp{
+  width:100%;height:100%;
+  background:#661111;
+  border:1px solid #440000;
+  border-radius:50%;
+  opacity:.12;
+  transition:opacity .3s, box-shadow .3s;
+}
+.redstone-lamp.on{opacity:1;background:#cc2222;box-shadow:0 0 8px rgba(255,60,60,.8);}
+/* 钻石块（第7关） */
+.diamond-blocks{
+  position:absolute;
+  top:74px;left:50%;
+  transform:translateX(-50%);
+  width:230px;height:88px;
+  display:grid;
+  grid-template-columns:repeat(10,1fr);
+  gap:2px;
+  padding:2px 4px;
+  pointer-events:none;
+  z-index:2;
+}
+.diamond-block{
+  width:100%;height:100%;
+  background:#2a8aaa;
+  border:2px solid #105060;
+  border-radius:2px;
+  opacity:.12;
+  transition:opacity .3s, box-shadow .3s;
+}
+.diamond-block.on{opacity:.65;box-shadow:0 0 6px rgba(100,220,255,.7);}
+/* 黑曜石盾（第8关） */
+.obsidian-shield{
+  position:absolute;
+  top:0;left:0;right:0;bottom:0;
+  border:6px solid transparent;
+  border-radius:8px;
+  pointer-events:none;
+  z-index:10;
+  transition:border-color .4s, box-shadow .4s;
+}
+.obsidian-shield.on{
+  border-color:rgba(120,60,220,.6);
+  box-shadow:inset 0 0 40px 10px rgba(120,60,220,.25);
+}
+/* === 沙地庭院（第3关） === */
+.sand-tiles{
+  position:absolute;
+  top:164px;
+  left:50%;
+  transform:translateX(-50%);
+  width:250px;
+  height:60px;
+  display:grid;
+  grid-template-columns:repeat(8,1fr);
+  grid-template-rows:repeat(2,1fr);
+  gap:2px;
+  padding:2px 4px;
+  pointer-events:none;
+  z-index:1;
+}
+.sand-tile{
+  width:100%;height:100%;
+  background:#b89b5a;
+  border:1px solid #9a8048;
+  border-radius:2px;
+  opacity:.12;
+  transition:opacity .3s, background .3s;
+}
+.sand-tile.on{opacity:1;background:#e6cc88;border-color:#c9ab60;box-shadow:inset 0 0 2px rgba(255,240,200,.4);}
+.cactus-row{
+  position:absolute;
+  top:100px;
+  width:28px;
+  height:64px;
+  pointer-events:none;
+  z-index:4;
+  opacity:0;
+  transition:opacity .35s, transform .35s;
+}
+.cactus-row.left{left:10px;}
+.cactus-row.mid-left{left:54px;}
+.cactus-row.mid-right{right:54px;}
+.cactus-row.right{right:10px;}
+.cactus-row.on{opacity:1;transform:scale(1);}
+.palm-tree{
+  position:absolute;
+  top:50px;
+  width:50px;
+  height:116px;
+  pointer-events:none;
+  z-index:4;
+  opacity:0;
+  transition:opacity .4s;
+}
+.palm-tree.left{left:0;}
+.palm-tree.right{right:0;}
+.palm-tree.on{opacity:1;}
+.well-wrap{
+  position:absolute;
+  top:108px;
+  left:50%;
+  transform:translateX(-50%);
+  width:44px;
+  height:58px;
+  pointer-events:none;
+  z-index:5;
+}
+.well-base{
+  position:absolute;
+  bottom:0;left:0;right:0;
+  height:28px;
+  background:#666;
+  border:2px solid #444;
+  border-radius:4px;
+  opacity:.15;
+  transition:opacity .3s, background .3s;
+}
+.well-base.on{opacity:1;background:#9a8048;background-image:linear-gradient(180deg,#b89b5a,#7a6438);}
+.well-roof{
+  position:absolute;
+  top:0;left:50%;
+  transform:translateX(-50%);
+  width:0;height:0;
+  border-left:24px solid transparent;
+  border-right:24px solid transparent;
+  border-bottom:18px solid #6b4423;
+  opacity:0;
+  transition:opacity .3s;
+}
+.well-roof.on{opacity:1;}
+.well-pole{
+  position:absolute;
+  top:14px;left:50%;
+  transform:translateX(-50%);
+  width:3px;
+  height:18px;
+  background:#6b4423;
+  opacity:0;
+  transition:opacity .3s;
+}
+.well-pole.on{opacity:1;}
+.well-bucket{
+  position:absolute;
+  top:28px;
+  left:calc(50% + 6px);
+  width:10px;
+  height:10px;
+  background:#8d6e63;
+  border:1px solid #5d4037;
+  border-radius:2px;
+  opacity:0;
+  transition:opacity .3s;
+}
+.well-bucket.on{opacity:1;}
+.beach-deco{
+  position:absolute;
+  bottom:36px;
+  left:20px;
+  right:20px;
+  display:flex;
+  justify-content:space-between;
+  pointer-events:none;
+  z-index:4;
+}
+.deco-item{
+  font-size:18px;
+  line-height:1;
+  opacity:.1;
+  transition:opacity .3s, transform .3s;
+}
+.deco-item.on{opacity:1;transform:scale(1.1);}
+/* 村庄僵尸——绕房屋出现 */
+.vzombie-container{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:12;
+}
+.vzombie{
+  position:absolute;
+  font-size:28px;
+  line-height:1;
+  opacity:0;
+  transition:left .45s ease, bottom .45s ease, right .45s ease, width .45s ease, opacity .2s;
+  pointer-events:none;
+  user-select:none;
+}
+.vz-body{width:100%;line-height:0;}
+.vz-body svg{
+  width:100%;
+  height:auto;
+  display:block;
+  transform-origin:50% 92%;
+  animation:vz-sway 1.1s ease-in-out infinite alternate;
+}
+@keyframes vz-sway{
+  from{transform:rotate(-3.5deg);}
+  to{transform:rotate(3.5deg);}
+}
+.vz-die{transform-origin:50% 92%;}
+@keyframes vz-die{
+  0%{opacity:1;transform:rotate(0deg) translateY(0);}
+  100%{opacity:0;transform:rotate(-85deg) translateY(10px);}
+}
+.vzombie.show{opacity:1;animation:vz-pop-in .3s ease-out;}
+@keyframes vz-pop-in{
+  0%{opacity:0;transform:scale(.3);}
+  60%{transform:scale(1.2);}
+  100%{opacity:1;transform:scale(1);}
+}
 .house-progress{
   text-align:center;
   font-size:12px;
@@ -537,6 +926,7 @@ body.theme-zombie{
 </style>
 </head>
 <body class="theme-grass">
+<div class="danger-flash" id="dangerFlash"></div>
 <div class="container">
   <div class="title">⛏️我的世界之认字大冒险</div>
   <div class="subtitle">幼小衔接 · 家长陪读 · 方块识字</div>
@@ -558,11 +948,6 @@ body.theme-zombie{
         <div class="block-card block-grass" id="charBlock">人</div>
         <div class="particle-container" id="particleBox"></div>
       </div>
-      <div class="zombie-lane" id="zombieLane" aria-label="僵尸靠近">
-        <div class="zombie-sil far"><div class="z-head"></div><div class="z-body"></div><div class="z-leg"></div><div class="z-leg r"></div></div>
-        <div class="zombie-sil mid"><div class="z-head"></div><div class="z-body"></div><div class="z-leg"></div><div class="z-leg r"></div></div>
-        <div class="zombie-sil close"><div class="z-head"></div><div class="z-body"></div><div class="z-leg"></div><div class="z-leg r"></div></div>
-      </div>
     </div>
     <div class="pinyin-row">
       <button type="button" class="btn-speak" id="btnSpeak" onclick="speakAndReveal()">🔊 朗读</button>
@@ -573,6 +958,10 @@ body.theme-zombie{
   </div>
 
   <div class="zombie" id="zombieText"></div>
+  <div class="wave-bar-wrap" id="waveBarWrap">
+    <div class="wave-bar-fill" id="waveBarFill" style="width:0%"></div>
+    <div class="wave-bar-label" id="waveBarLabel">👹 僵尸波次 0/5</div>
+  </div>
   <div class="tip-text" id="tipText">宝贝大声读出方块上的汉字吧！</div>
 
   <div class="btn-group" id="primaryBtns">
@@ -594,8 +983,36 @@ body.theme-zombie{
       <div class="path-row" id="pathRow"></div>
       <div class="flower-row" id="flowerRow"></div>
       <div class="fence-row" id="fenceRow"></div>
+      <div class="sand-tiles" id="sandTiles"></div>
+      <div class="cactus-row left" id="cactusL1">🌵</div>
+      <div class="cactus-row mid-left" id="cactusL2">🌵</div>
+      <div class="cactus-row mid-right" id="cactusR2">🌵</div>
+      <div class="cactus-row right" id="cactusR1">🌵</div>
+      <div class="palm-tree left" id="palmLeft">🌴</div>
+      <div class="palm-tree right" id="palmRight">🌴</div>
+      <div class="well-wrap" id="wellWrap">
+        <div class="well-base" id="wellBase"></div>
+        <div class="well-roof" id="wellRoof"></div>
+        <div class="well-pole" id="wellPole"></div>
+        <div class="well-bucket" id="wellBucket"></div>
+      </div>
+      <div class="beach-deco" id="beachDeco"></div>
+      <div class="iron-bars" id="ironBars"></div>
+      <div class="emerald-gems" id="emeraldGems"></div>
+      <div class="redstone-lamps" id="redstoneLamps"></div>
+      <div class="diamond-blocks" id="diamondBlocks"></div>
+      <div class="obsidian-shield" id="obsidianShield"></div>
+      <div class="vzombie-container" id="vzombieContainer"></div>
     </div>
     <div class="house-progress" id="houseProgress">小屋 0 / 30</div>
+  </div>
+
+  <div class="turret-section" id="turretSection">
+    <div class="turret-title">🏰 炮塔防御</div>
+    <div class="turret-row" id="turretRow"></div>
+    <div style="text-align:center;margin-top:4px;">
+      <button class="btn-turret" id="btnTurret" onclick="buildTurret()">🔫 建造炮塔（3💎）</button>
+    </div>
   </div>
 
   <div class="btn-group secondary">
@@ -681,46 +1098,91 @@ const PINYIN = {
   "天":"tiān","地":"dì","风":"fēng","云":"yún","雨":"yǔ","火":"huǒ","石":"shí","田":"tián",
   "土":"tǔ","木":"mù","禾":"hé","虫":"chóng","大":"dà","小":"xiǎo","多":"duō","少":"shǎo",
   "上":"shàng","下":"xià","左":"zuǒ","右":"yòu","来":"lái","去":"qù",
-  "白":"bái","黑":"hēi","高":"gāo","低":"dī","开":"kāi","关":"guān","出":"chū","入":"rù",
-  "飞":"fēi","马":"mǎ","牛":"niú","羊":"yáng","鱼":"yú","鸟":"niǎo","花":"huā","草":"cǎo",
-  "树":"shù","叶":"yè","星":"xīng","光":"guāng","哥":"gē","姐":"jiě","弟":"dì","妹":"mèi",
-  "爸":"bà","妈":"mā","爷":"yé","奶":"nǎi","耳":"ěr","目":"mù","书":"shū","刀":"dāo",
-  "尺":"chǐ","本":"běn","巾":"jīn",
+  "一":"yī","二":"èr","三":"sān","四":"sì","五":"wǔ","六":"liù","七":"qī","八":"bā","九":"jiǔ","十":"shí",
+  "百":"bǎi","千":"qiān","万":"wàn","元":"yuán","角":"jiǎo","分":"fēn","年":"nián","岁":"suì",
+  "门":"mén","车":"chē","工":"gōng","力":"lì","女":"nǚ","子":"zǐ","学":"xué","生":"shēng",
+  "老":"lǎo","师":"shī","同":"tóng","朋":"péng","友":"yǒu","家":"jiā","国":"guó","中":"zhōng",
+  "文":"wén","字":"zì","画":"huà","书":"shū","笔":"bǐ","纸":"zhǐ","刀":"dāo","尺":"chǐ",
+  "本":"běn","巾":"jīn","伞":"sǎn","白":"bái","黑":"hēi","高":"gāo","低":"dī",
+  "开":"kāi","关":"guān","出":"chū","入":"rù","飞":"fēi","马":"mǎ","牛":"niú","羊":"yáng",
+  "鱼":"yú","鸟":"niǎo","花":"huā","草":"cǎo","树":"shù","叶":"yè","星":"xīng","光":"guāng",
+  "圆":"yuán","方":"fāng","长":"cháng","短":"duǎn","形":"xíng","冷":"lěng","热":"rè","快":"kuài",
+  "慢":"màn","新":"xīn","旧":"jiù","真":"zhēn","假":"jiǎ","对":"duì","错":"cuò","问":"wèn",
+  "答":"dá","哥":"gē","姐":"jiě","弟":"dì","妹":"mèi","爸":"bà","妈":"mā","爷":"yé",
+  "奶":"nǎi","耳":"ěr","目":"mù","头":"tóu","舌":"shé","牙":"yá","心":"xīn","身":"shēn",
+  "体":"tǐ","毛":"máo","皮":"pí","米":"mǐ","面":"miàn","瓜":"guā","果":"guǒ","菜":"cài",
+  "肉":"ròu","蛋":"dàn","茶":"chá","糖":"táng","盐":"yán","油":"yóu","吃":"chī","喝":"hē",
+  "坐":"zuò","站":"zhàn","打":"dǎ","拍":"pāi","拉":"lā","推":"tuī","踢":"tī","跳":"tiào",
+  "游":"yóu","唱":"chàng","写":"xiě","读":"dú","算":"suàn","数":"shù","教":"jiāo","念":"niàn",
+  "记":"jì","忘":"wàng","想":"xiǎng","爱":"ài","怕":"pà","忙":"máng","累":"lèi","饿":"è",
+  "渴":"kě","困":"kùn","疼":"téng","病":"bìng","药":"yào","金":"jīn","银":"yín","铜":"tóng",
+  "铁":"tiě","冰":"bīng","雪":"xuě","海":"hǎi","河":"hé","江":"jiāng","湖":"hú","林":"lín",
+  "森":"sēn","园":"yuán","洞":"dòng","窗":"chuāng","墙":"qiáng","井":"jǐng","线":"xiàn","网":"wǎng",
+  "桌":"zhuō","椅":"yǐ","床":"chuáng","灯":"dēng","路":"lù","桥":"qiáo","船":"chuán","电":"diàn",
+  "声":"shēng","色":"sè","乐":"lè","好":"hǎo","美":"měi",
   "春":"chūn","夏":"xià","秋":"qiū","冬":"dōng","早":"zǎo","晚":"wǎn","明":"míng","亮":"liàng",
   "笑":"xiào","哭":"kū","走":"zǒu","跑":"pǎo","说":"shuō","话":"huà","听":"tīng","看":"kàn",
-  "红":"hóng","绿":"lǜ","黄":"huáng","蓝":"lán"
+  "红":"hóng","绿":"lǜ","黄":"huáng","蓝":"lán","领":"lǐng","王":"wáng","丽":"lì","安":"ān",
+  "全":"quán","广":"guǎng"
 };
 const COMPOUND = {
   "人":"大人","口":"口渴","手":"洗手","足":"足球","山":"大山","水":"喝水","日":"日出","月":"月亮",
   "天":"天空","地":"土地","风":"大风","云":"白云","雨":"下雨","火":"火车","石":"石头","田":"田地",
   "土":"土地","木":"树木","禾":"禾苗","虫":"虫子","大":"大门","小":"小朋友","多":"多少","少":"多少",
   "上":"上面","下":"下面","左":"左边","右":"右边","来":"过来","去":"回去",
-  "白":"白云","黑":"黑色","高":"高山","低":"低头","开":"开门","关":"关门","出":"出门","入":"进入",
-  "飞":"飞机","马":"马车","牛":"牛奶","羊":"小羊","鱼":"小鱼","鸟":"小鸟","花":"花朵","草":"小草",
-  "树":"大树","叶":"叶子","星":"星星","光":"阳光","哥":"哥哥","姐":"姐姐","弟":"弟弟","妹":"妹妹",
-  "爸":"爸爸","妈":"妈妈","爷":"爷爷","奶":"奶奶","耳":"耳朵","目":"目光","书":"书本","刀":"小刀",
-  "尺":"尺子","本":"本子","巾":"毛巾",
+  "一":"一个","二":"二月","三":"三月","四":"四月","五":"五月","六":"六月","七":"七月","八":"八月","九":"九月","十":"十月",
+  "百":"一百","千":"一千","万":"一万","元":"一元","角":"一角","分":"一分","年":"今年","岁":"几岁",
+  "门":"开门","车":"汽车","工":"工人","力":"力气","女":"女生","子":"孩子","学":"学习","生":"生日",
+  "老":"老师","师":"老师","同":"同学","朋":"朋友","友":"朋友","家":"回家","国":"中国","中":"中间",
+  "文":"中文","字":"汉字","画":"画画","书":"书本","笔":"铅笔","纸":"白纸","刀":"小刀","尺":"尺子",
+  "本":"本子","巾":"毛巾","伞":"雨伞","白":"白云","黑":"黑色","高":"高山","低":"低头",
+  "开":"开门","关":"关门","出":"出门","入":"进入","飞":"飞机","马":"马车","牛":"牛奶","羊":"小羊",
+  "鱼":"小鱼","鸟":"小鸟","花":"花朵","草":"小草","树":"大树","叶":"叶子","星":"星星","光":"阳光",
+  "圆":"圆形","方":"方形","长":"很长","短":"很短","形":"形状","冷":"很冷","热":"很热","快":"很快",
+  "慢":"很慢","新":"新的","旧":"旧的","真":"真的","假":"假的","对":"对的","错":"错的","问":"问题",
+  "答":"回答","哥":"哥哥","姐":"姐姐","弟":"弟弟","妹":"妹妹","爸":"爸爸","妈":"妈妈","爷":"爷爷",
+  "奶":"奶奶","耳":"耳朵","目":"目光","头":"头发","舌":"舌头","牙":"牙齿","心":"开心","身":"身体",
+  "体":"身体","毛":"毛衣","皮":"皮肤","米":"大米","面":"面条","瓜":"西瓜","果":"水果","菜":"白菜",
+  "肉":"牛肉","蛋":"鸡蛋","茶":"喝茶","糖":"白糖","盐":"食盐","油":"加油","吃":"吃饭","喝":"喝水",
+  "坐":"坐下","站":"站立","打":"打球","拍":"拍手","拉":"拉手","推":"推开","踢":"踢球","跳":"跳高",
+  "游":"游泳","唱":"唱歌","写":"写字","读":"读书","算":"算数","数":"数学","教":"教师","念":"念书",
+  "记":"记住","忘":"忘记","想":"想念","爱":"爱心","怕":"害怕","忙":"很忙","累":"很累","饿":"饿了",
+  "渴":"口渴","困":"困了","疼":"头疼","病":"生病","药":"吃药","金":"金子","银":"银子","铜":"铜钱",
+  "铁":"钢铁","冰":"冰块","雪":"下雪","海":"大海","河":"小河","江":"长江","湖":"湖水","林":"树林",
+  "森":"森林","园":"花园","洞":"山洞","窗":"窗户","墙":"墙壁","井":"水井","线":"线条","网":"上网",
+  "桌":"桌子","椅":"椅子","床":"床上","灯":"灯光","路":"马路","桥":"小桥","船":"小船","电":"电话",
+  "声":"声音","色":"颜色","乐":"快乐","好":"好的","美":"美丽",
   "春":"春天","夏":"夏天","秋":"秋天","冬":"冬天","早":"早上","晚":"晚上","明":"明天","亮":"明亮",
   "笑":"笑脸","哭":"哭泣","走":"走路","跑":"跑步","说":"说话","话":"说话","听":"听话","看":"看见",
-  "红":"红色","绿":"绿色","黄":"黄色","蓝":"蓝色"
+  "红":"红色","绿":"绿色","黄":"黄色","蓝":"蓝色","领":"领导","王":"国王","丽":"美丽","安":"安全",
+  "全":"全部","广":"广场"
 };
 let zhVoice = null;
 function loadVoices(){
   if(!window.speechSynthesis) return;
-  const voices = speechSynthesis.getVoices();
-  zhVoice = voices.find(v => v.lang === "zh-CN")
-    || voices.find(v => (v.lang || "").toLowerCase().startsWith("zh"))
+  const voices = speechSynthesis.getVoices() || [];
+  if(!voices.length) return;
+  const notCantonese = v => !/粤|粵|hk|yue/i.test(String(v.name || "") + String(v.lang || ""));
+  const notTw = v => !/台湾|台灣|tw-|_TW|TW"/i.test(String(v.name || "") + String(v.lang || ""));
+  // 精确匹配普通话声音：优先 Google 普通话（Chrome 里最稳），其次系统婷婷，再回退到中国大陆普通话
+  zhVoice =
+    voices.find(v => /普通话/.test(v.name) && notCantonese(v))
+    || voices.find(v => /婷婷|ting/i.test(v.name) && notCantonese(v))
+    || voices.find(v => /^(zh|cmn)-?(CN|cn)/i.test(v.lang) && notCantonese(v) && notTw(v))
     || null;
+  console.log("选中声音：", zhVoice ? (zhVoice.name + " | " + zhVoice.lang) : "未找到普通话声音");
 }
 function speakCurrent(){
   const ch = currentChar();
   if(!ch || !window.speechSynthesis) return;
+  if(!zhVoice) loadVoices();
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(ch);
   u.lang = "zh-CN";
   u.rate = 0.75;
   if(zhVoice) u.voice = zhVoice;
-  speechSynthesis.speak(u);
+  console.log("朗读用声：", zhVoice ? (zhVoice.name + " | " + zhVoice.lang) : "浏览器默认");
+  setTimeout(function(){ speechSynthesis.speak(u); }, 60);
 }
 function revealPinyin(){
   pinyinRevealed = true;
@@ -741,11 +1203,16 @@ if(window.speechSynthesis){
 
 // ====== 生字库 ======
 const levels = [
-  { name:"🌿 第一关 · 草方块入门", icon:"挖开方块读出汉字", skin:"grass", words:["人","口","手","足","山","水","日","月","天","地","风","云","雨","火","石","田","土","木","禾","虫","大","小","多","少","上","下","左","右","来","去"] },
-  { name:"⛏️ 第二关 · 铁矿层进阶", icon:"读出汉字挖到铁矿", skin:"iron", words:["白","黑","高","低","开","关","出","入","飞","马","牛","羊","鱼","鸟","花","草","树","叶","星","光","哥","姐","弟","妹","爸","妈","爷","奶","耳","目","书","刀","尺","本","巾"] },
-  { name:"👹 第三关 · 汉字僵尸大作战", icon:"读对击退僵尸，错字进错题本", skin:"zombie", words:["春","夏","秋","冬","早","晚","明","亮","笑","哭","走","跑","说","话","听","看","红","绿","黄","蓝"] }
+  { name:"🌿 第一关 · 草方块入门", icon:"挖开方块读出汉字", skin:"grass", words:["人","口","手","足","山","水","日","月","天","地","风","云","雨","火","大","小","多","少","上","下","石","田","土","木","禾","左","右","来","去"] },
+  { name:"🪨 第二关 · 石头层", icon:"读出汉字凿开石头", skin:"stone", words:["虫","一","二","三","四","五","六","七","八","九","十","百","千","万","元","角","分","年","岁","门","车","工","力","女","子","学","生","老","师"] },
+  { name:"🏖️ 第三关 · 沙子层", icon:"读出汉字挖开沙子", skin:"sand", words:["同","朋","友","家","国","中","文","字","画","书","笔","纸","刀","尺","本","巾","伞","白","黑","高","低","开","关","出","入","飞","马","牛","羊"] },
+  { name:"⛏️ 第四关 · 铁矿石层", icon:"读出汉字挖到铁矿", skin:"iron", words:["鱼","鸟","花","草","树","叶","星","光","圆","方","长","短","形","冷","热","快","慢","新","旧","真","假","对","错","问","答","哥","姐","弟","妹"] },
+  { name:"💎 第五关 · 绿宝石层", icon:"读出汉字挖到绿宝石", skin:"emerald", words:["爸","妈","爷","奶","耳","目","头","舌","牙","心","身","体","毛","皮","米","面","瓜","果","菜","肉","蛋","茶","糖","盐","油","吃","喝","坐","站"] },
+  { name:"🔴 第六关 · 红石层", icon:"读出汉字挖到红石", skin:"redstone", words:["打","拍","拉","推","踢","跳","游","唱","写","读","算","数","教","念","记","忘","想","爱","怕","忙","累","饿","渴","困","疼","病","药","金","银"] },
+  { name:"💠 第七关 · 钻石层", icon:"读出汉字挖到钻石", skin:"diamond", words:["铜","铁","冰","雪","海","河","江","湖","林","森","园","洞","窗","墙","井","线","网","桌","椅","床","灯","路","桥","船","电","声","色","乐","好"] },
+  { name:"🖤 第八关 · 黑曜石层", icon:"读出汉字挖到黑曜石", skin:"obsidian", words:["美","春","夏","秋","冬","早","晚","明","亮","笑","哭","走","跑","说","话","听","看","红","绿","黄","蓝","领","王","丽","安","全","叶","广","万"] }
 ];
-const SKINS = ["grass","iron","zombie"];
+const SKINS = ["grass","stone","sand","iron","emerald","redstone","diamond","obsidian"];
 const AUTO_NEXT_MS = 900;
 
 // ====== 本地存储 ======
@@ -761,7 +1228,10 @@ function saveState(){
     reviewIndex:reviewIndex,
     resumeIndex:resumeIndex,
     pendingLevelUp:pendingLevelUp,
-    build:build
+    build:build,
+    zombieWave:zombieWave,
+    turretCount:turretCount,
+    zombieSlots:zombieSlots
   };
   try{ localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }catch(e){}
 }
@@ -778,6 +1248,19 @@ function loadState(){
       if(typeof s.reviewIndex === "number") reviewIndex = s.reviewIndex;
       if(typeof s.resumeIndex === "number") resumeIndex = s.resumeIndex;
       if(typeof s.pendingLevelUp === "boolean") pendingLevelUp = s.pendingLevelUp;
+      if(typeof s.zombieWave === "number") zombieWave = s.zombieWave;
+      if(typeof s.turretCount === "number") turretCount = s.turretCount;
+      if(Array.isArray(s.zombieSlots)){
+        zombieSlots = s.zombieSlots.filter(function(v){ return typeof v === "number" && v >= 0 && v < 24; });
+      }else if(typeof s.zombieCount === "number" && s.zombieCount > 0){
+        // 旧存档：没有位置信息，僵尸都视为贴在房子跟前
+        zombieSlots = [];
+        for(let st=5; st>=0 && zombieSlots.length < s.zombieCount; st--){
+          for(let ln=0; ln<4 && zombieSlots.length < s.zombieCount; ln++){
+            zombieSlots.push(ln*6 + st);
+          }
+        }
+      }
       loadBuild(s);
       if(s.inReview && reviewList.length){
         inReview = true;
@@ -805,11 +1288,20 @@ let reviewList = [];
 let reviewIndex = 0;
 let resumeIndex = 0;
 let pendingLevelUp = false;
-let build = [0, 0, 0];
+let build = [0,0,0,0,0,0,0,0];
+let zombieWave = 0;
+let turretCount = 0;
+let zombieSlots = [];   // 每只僵尸的站位索引 = 路线*8 + 步数（0=最远，7=贴房）
+let lastVzCount = 0;
 const CHAPTERS = [
   { title:"🏠 建造你的生存小屋", short:"小屋", done:"🏠 小屋建成！" },
-  { title:"🌿 给小屋围上院子", short:"院子", done:"🌿 院子围好了！" },
-  { title:"🔥 点亮火把，守夜", short:"守夜", done:"🔥 村庄守夜完成！" }
+  { title:"🪨 石墙加固", short:"石墙", done:"🪨 石墙完成！" },
+  { title:"🏖️ 沙地庭院（铺地砖·仙人掌·水井·棕榈）", short:"庭院", done:"🏖️ 沙地庭院建成！椰林水井，阳光明媚！" },
+  { title:"⛏️ 铁栅栏", short:"铁栏", done:"⛏️ 铁栏完工！" },
+  { title:"💎 绿宝石塔", short:"宝塔", done:"💎 宝塔落成！" },
+  { title:"🔴 红石机关", short:"机关", done:"🔴 机关就绪！" },
+  { title:"💠 钻石城墙", short:"城墙", done:"💠 城墙坚不可摧！" },
+  { title:"🖤 黑曜石堡垒", short:"堡垒", done:"🖤 堡垒建成！村庄永不陷落！" }
 ];
 function chapterMax(i){
   return levels[i].words.length;
@@ -819,13 +1311,15 @@ const YARD_PATH = 8;
 const YARD_FENCE = 15;
 const YARD_FLOWER = 12;
 const NIGHT_TORCH = 8;
+const SAND_TILES = 16;
+const BEACH_DECO_COUNT = 3;
 const FLOWER_EMOJI = ["🌸","🌼","🌺","🌷","🌼","🌸","🌻","💮","🌸","🌼","🌺","🌷"];
+const BEACH_EMOJI = ["🐚","🦀","🌺","☀️","🐚","🦀","🌻","⭐"];
 
 const dom = {
   stageTitle: document.getElementById("stageTitle"),
   stageIcon: document.getElementById("stageIcon"),
   gemCount: document.getElementById("gemCount"),
-  zombieLane: document.getElementById("zombieLane"),
   progress: document.getElementById("progress"),
   missCount: document.getElementById("missCount"),
   charBlock: document.getElementById("charBlock"),
@@ -896,8 +1390,13 @@ let noteAfter = null;
 let skipEnterModal = false;
 const LEVEL_ENTER = [
   null,
-  { title:"⛏️ 铁矿层开了！", text:"小屋还在。接下来给它围上院子吧！" },
-  { title:"👹 僵尸夜开始了！", text:"点亮火把，守住我们的家！" }
+  { title:"🪨 石头层开了！", text:"小屋还在，用石头加固墙壁吧！" },
+  { title:"🏖️ 沙子层来了！", text:"石墙砌好啦！铺沙地砖、种仙人掌、挖水井，打造一片阳光沙地庭院吧！" },
+  { title:"⛏️ 铁矿石层！", text:"庭院铺好了，来打造铁栅栏！" },
+  { title:"💎 绿宝石层！", text:"铁栏立好了，建一座绿宝石塔！" },
+  { title:"🔴 红石层！", text:"宝塔落成，布置红石机关！" },
+  { title:"💠 钻石层！", text:"机关就绪，砌钻石城墙！" },
+  { title:"🖤 黑曜石层！", text:"城墙已完成，最后的黑曜石堡垒！" }
 ];
 function showNote(title, text, after){
   noteAfter = after || null;
@@ -918,13 +1417,17 @@ function willLevelUpAfterThis(){
   return index >= wordList.length - 1 && missed.length === 0;
 }
 function combinedClearText(){
-  if(currentLevel === 0){
-    return { title:"🏠 小屋建成！", text:"太棒了！接下来进入铁矿层，给小屋围上院子。" };
-  }
-  if(currentLevel === 1){
-    return { title:"🌿 院子围好了！", text:"夜晚快到了。进入第三关，点亮火把守夜！" };
-  }
-  return { title:"🔥 村庄守夜完成！", text:"你把家守得很好，继续把剩下的字读完吧！" };
+  const msgs = [
+    { title:"🏠 小屋建成！", text:"太棒了！接下来进入石头层，加固墙壁！" },
+    { title:"🪨 石墙完成了！", text:"进入沙子层，铺沙地砖、种仙人掌、挖水井！" },
+    { title:"🏖️ 庭院铺好了！", text:"进入铁矿石层，打造铁栅栏！" },
+    { title:"⛏️ 铁栏完工了！", text:"进入绿宝石层，建一座宝塔！" },
+    { title:"💎 宝塔落成了！", text:"进入红石层，布置机关！" },
+    { title:"🔴 机关就绪！", text:"进入钻石层，砌城墙！" },
+    { title:"💠 城墙坚不可摧！", text:"进入最后一关黑曜石层！" },
+    { title:"🖤 堡垒建成了！", text:"你把村庄建成了坚不可摧的堡垒！" }
+  ];
+  return msgs[currentLevel] || msgs[7];
 }
 
 function fillKids(el, count, className, labels){
@@ -943,8 +1446,8 @@ function toggleOn(nodes, filled){
   }
 }
 function loadBuild(s){
-  if(Array.isArray(s.build) && s.build.length >= 3){
-    build = [0,1,2].map(function(i){
+  if(Array.isArray(s.build) && s.build.length >= 8){
+    build = [0,1,2,3,4,5,6,7].map(function(i){
       const n = s.build[i];
       if(typeof n !== "number" || n < 0) return 0;
       return Math.min(Math.floor(n), chapterMax(i));
@@ -952,8 +1455,8 @@ function loadBuild(s){
     return;
   }
   let rest = typeof s.gem === "number" ? s.gem : 0;
-  build = [0, 0, 0];
-  const unlocked = Math.min(currentLevel, 2);
+  build = [0,0,0,0,0,0,0,0];
+  const unlocked = Math.min(currentLevel, 7);
   for(let i=0;i<=unlocked;i++){
     build[i] = Math.min(Math.max(0, rest), chapterMax(i));
     rest -= build[i];
@@ -971,9 +1474,16 @@ function initVillage(){
   fillKids(dom.flowerRow, YARD_FLOWER, "flower", FLOWER_EMOJI);
   fillKids(dom.torchesLeft, NIGHT_TORCH / 2, "torch");
   fillKids(dom.torchesRight, NIGHT_TORCH / 2, "torch");
+  fillKids(document.getElementById("sandTiles"), SAND_TILES, "sand-tile");
+  fillKids(document.getElementById("beachDeco"), BEACH_DECO_COUNT, "deco-item", BEACH_EMOJI);
+  fillKids(document.getElementById("ironBars"), chapterMax(3), "iron-bar");
+  fillKids(document.getElementById("emeraldGems"), chapterMax(4), "emerald-gem");
+  fillKids(document.getElementById("redstoneLamps"), chapterMax(5), "redstone-lamp");
+  fillKids(document.getElementById("diamondBlocks"), chapterMax(6), "diamond-block");
 }
 
 function renderVillage(){
+  // 第1关：小屋墙壁+屋顶
   const hutMax = chapterMax(0);
   const hut = Math.min(build[0], hutMax);
   const wallFilled = Math.min(hut, HUT_WALL);
@@ -986,6 +1496,7 @@ function renderVillage(){
   }
   dom.roofFill.style.clipPath = "inset(" + ((1 - Math.min(roofFilled / roofMax, 1)) * 100) + "% 0 0 0)";
 
+  // 第2关：石子路+栅栏+花
   const yardMax = chapterMax(1);
   const yard = Math.min(build[1], yardMax);
   const pathFilled = Math.min(yard, YARD_PATH);
@@ -995,23 +1506,54 @@ function renderVillage(){
   toggleOn(dom.fenceRow.querySelectorAll(".fence-post"), fenceFilled);
   toggleOn(dom.flowerRow.querySelectorAll(".flower"), flowerFilled);
 
-  const nightMax = chapterMax(2);
-  const night = Math.min(build[2], nightMax);
-  const torchFilled = Math.min(night, NIGHT_TORCH);
-  const flagMax = Math.max(1, nightMax - NIGHT_TORCH);
-  const flagFilled = Math.min(Math.max(0, night - NIGHT_TORCH), flagMax);
-  const leftTorches = dom.torchesLeft.querySelectorAll(".torch");
-  const rightTorches = dom.torchesRight.querySelectorAll(".torch");
-  const perSide = NIGHT_TORCH / 2;
-  toggleOn(leftTorches, Math.min(torchFilled, perSide));
-  toggleOn(rightTorches, Math.max(0, torchFilled - perSide));
-  if(night > 0){
-    dom.flagPole.classList.add("on");
-  }else{
-    dom.flagPole.classList.remove("on");
+  // 第3关：沙地庭院（沙地砖→仙人掌→水井→棕榈→沙滩装饰）
+  const sandMax = chapterMax(2);
+  const sand = Math.min(build[2], sandMax);
+  let rem = sand;
+  const tileFilled = Math.min(rem, SAND_TILES);
+  rem = Math.max(0, rem - SAND_TILES);
+  const cactusFilled = Math.min(rem, 4);
+  rem = Math.max(0, rem - 4);
+  const wellFilled = Math.min(rem, 4);
+  rem = Math.max(0, rem - 4);
+  const palmFilled = Math.min(rem, 2);
+  rem = Math.max(0, rem - 2);
+  const decoFilled = Math.min(rem, BEACH_DECO_COUNT);
+  toggleOn(document.getElementById("sandTiles").querySelectorAll(".sand-tile"), tileFilled);
+  const cactusIds = ["cactusL1","cactusL2","cactusR2","cactusR1"];
+  for(let ci=0;ci<4;ci++){
+    const el = document.getElementById(cactusIds[ci]);
+    if(el) el.classList.toggle("on", ci < cactusFilled);
   }
-  const flagPercent = Math.min(flagFilled / flagMax, 1);
-  dom.flagFill.style.clipPath = "inset(0 " + ((1 - flagPercent) * 100) + "% 0 0)";
+  document.getElementById("wellBase").classList.toggle("on", wellFilled >= 1);
+  document.getElementById("wellRoof").classList.toggle("on", wellFilled >= 2);
+  document.getElementById("wellPole").classList.toggle("on", wellFilled >= 3);
+  document.getElementById("wellBucket").classList.toggle("on", wellFilled >= 4);
+  document.getElementById("palmLeft").classList.toggle("on", palmFilled >= 1);
+  document.getElementById("palmRight").classList.toggle("on", palmFilled >= 2);
+  toggleOn(document.getElementById("beachDeco").querySelectorAll(".deco-item"), decoFilled);
+
+  // 第4关：铁栅栏——一字一栅
+  const ironMax = chapterMax(3);
+  toggleOn(document.getElementById("ironBars").querySelectorAll(".iron-bar"), Math.min(build[3], ironMax));
+
+  // 第5关：绿宝石——一字一宝石
+  const emeraldMax = chapterMax(4);
+  toggleOn(document.getElementById("emeraldGems").querySelectorAll(".emerald-gem"), Math.min(build[4], emeraldMax));
+
+  // 第6关：红石灯——一字一盏
+  const redstoneMax = chapterMax(5);
+  toggleOn(document.getElementById("redstoneLamps").querySelectorAll(".redstone-lamp"), Math.min(build[5], redstoneMax));
+
+  // 第7关：钻石块——一字一块
+  const diamondMax = chapterMax(6);
+  toggleOn(document.getElementById("diamondBlocks").querySelectorAll(".diamond-block"), Math.min(build[6], diamondMax));
+
+  // 第8关：黑曜石盾
+  var shield = document.getElementById("obsidianShield");
+  const obsMax = chapterMax(7);
+  if(build[7] >= obsMax){ shield.classList.add("on"); }
+  else{ shield.classList.remove("on"); }
 
   const ch = CHAPTERS[currentLevel];
   const max = chapterMax(currentLevel);
@@ -1021,6 +1563,148 @@ function renderVillage(){
     dom.houseProgress.innerText = ch.done;
   }else{
     dom.houseProgress.innerText = ch.short + " " + n + " / " + max;
+  }
+  renderVillageZombies();
+}
+
+// 植物大战僵尸风格的小僵尸（侧视、灰绿皮肤、破西装红领带、前伸手臂），默认面朝右
+const ZOMBIE_SVG = '<svg viewBox="0 0 44 52" xmlns="http://www.w3.org/2000/svg">'
++ '<path d="M15 25 Q12 31 12.5 37" stroke="#8c9160" stroke-width="4.5" fill="none" stroke-linecap="round"/>'
++ '<path d="M18 38 L15 49" stroke="#4e463c" stroke-width="5" stroke-linecap="round"/>'
++ '<path d="M25 38 L28 49" stroke="#3e3830" stroke-width="5" stroke-linecap="round"/>'
++ '<ellipse cx="13.5" cy="50" rx="4" ry="1.8" fill="#2f2b25"/>'
++ '<ellipse cx="30" cy="50" rx="4" ry="1.8" fill="#2f2b25"/>'
++ '<path d="M13 23 L29 21 L31 36 L28 40 L25 37 L21 41 L17 38 L13 41 Z" fill="#6d5233"/>'
++ '<path d="M22 23 L25 23 L24 33 L22.6 33 Z" fill="#b03a2e"/>'
++ '<path d="M27 25 Q34 26.5 40 25" stroke="#a8ad74" stroke-width="4.5" fill="none" stroke-linecap="round"/>'
++ '<circle cx="41" cy="24.6" r="2.6" fill="#a8ad74"/>'
++ '<g transform="rotate(-9 23 15)">'
++ '<ellipse cx="23" cy="14" rx="9" ry="7.6" fill="#a8ad74"/>'
++ '<ellipse cx="27" cy="19" rx="4.6" ry="3" fill="#999e69"/>'
++ '<ellipse cx="27.5" cy="18" rx="3.4" ry="1.7" fill="#4a3428"/>'
++ '<rect x="26.4" y="17" width="1.4" height="1.2" fill="#ddd"/>'
++ '<circle cx="28" cy="11.6" r="2.7" fill="#e8e6d4"/>'
++ '<circle cx="29" cy="12" r="1.1" fill="#1d1a14"/>'
++ '<circle cx="21.5" cy="11" r="2.2" fill="#e8e6d4"/>'
++ '<circle cx="20.8" cy="11.4" r="1" fill="#1d1a14"/>'
++ '<path d="M25.4 9.6 Q28 8.6 30.6 10" stroke="#7c8156" stroke-width="1.2" fill="none"/>'
++ '<path d="M15.5 10 Q16 5.5 20 6.5 Q18.5 8.5 17.5 10.5 Z" fill="#4a4438"/>'
++ '<path d="M20 6.8 Q23 4.5 25.5 6.2 Q23 7.5 21.5 8.8 Z" fill="#4a4438"/>'
++ '</g></svg>';
+
+// 四条行进路线 × 6 个站位（0=最远，5=贴房即停）；站位索引 = 路线*6 + 步数
+// 路线 0/2 面朝右，路线 1/3 面朝左（僵尸始终面向房子）
+const ZOMBIE_SLOTS = [
+  // 路线0 左前方：左下角 → 房前大门
+  [{left:14,bottom:2},{left:40,bottom:8},{left:64,bottom:14},{left:88,bottom:20},{left:110,bottom:27},{left:128,bottom:35}],
+  // 路线1 右前方：右下角 → 房前大门（面朝左）
+  [{right:14,bottom:2},{right:40,bottom:8},{right:64,bottom:14},{right:88,bottom:20},{right:110,bottom:27},{right:128,bottom:35}],
+  // 路线2 左墙根：左下角 → 左墙上半部
+  [{left:4,bottom:2},{left:4,bottom:22},{left:5,bottom:42},{left:5,bottom:62},{left:6,bottom:82},{left:7,bottom:100}],
+  // 路线3 右墙根：右下角 → 右墙上半部（面朝左）
+  [{right:4,bottom:2},{right:4,bottom:22},{right:5,bottom:42},{right:5,bottom:62},{right:6,bottom:82},{right:7,bottom:100}]
+];
+const ZOMBIE_MAX = 24;
+
+// 每答错一次：70% 前进（随机一只往前挪一格）/ 30% 增援（最外围多来一只）
+// 前进无可挪（都贴到房前）时改为增援
+function zombieAction(){
+  const occupied = {};
+  for(let i=0;i<zombieSlots.length;i++) occupied[zombieSlots[i]] = true;
+  const doReinforce = function(){
+    // 优先从四条路线最外围进场；外围都被占则找最远的空位
+    const starts = [0,6,12,18].filter(function(s){ return !occupied[s]; });
+    let slot;
+    if(starts.length){
+      slot = starts[Math.floor(Math.random()*starts.length)];
+    }else{
+      const free = [];
+      for(let s=0;s<ZOMBIE_MAX;s++) if(!occupied[s]) free.push(s);
+      if(!free.length) return false;
+      free.sort(function(a,b){ return (a%6) - (b%6); });
+      slot = free[0];
+    }
+    zombieSlots.push(slot);
+    return true;
+  };
+  const doAdvance = function(){
+    const movable = [];
+    for(let i=0;i<zombieSlots.length;i++){
+      const s = zombieSlots[i];
+      if((s%6) < 5 && !occupied[s+1]) movable.push(i);
+    }
+    if(!movable.length) return false;
+    const pick = movable[Math.floor(Math.random()*movable.length)];
+    zombieSlots[pick] += 1;
+    return true;
+  };
+  if(Math.random() < 0.7){
+    if(!doAdvance()) doReinforce();
+  }else{
+    doReinforce();
+  }
+}
+
+// 每答对一个字：离房子最近的一只僵尸后退一步；没法退（已在外围或身后一格被占）就地被干掉
+function zombieRetreat(){
+  if(zombieSlots.length === 0) return null;
+  let best = 0;
+  for(let i=1;i<zombieSlots.length;i++){
+    if((zombieSlots[i]%6) > (zombieSlots[best]%6)) best = i;
+  }
+  const slot = zombieSlots[best];
+  const occupied = {};
+  for(let i=0;i<zombieSlots.length;i++) occupied[zombieSlots[i]] = true;
+  if((slot%6) > 0 && !occupied[slot-1]){
+    zombieSlots[best] -= 1;
+    return "retreat";
+  }
+  // 没法退：原地倒下消失（克隆一个尸体节点播放倒下动画，本体从队列移除）
+  const container = document.getElementById("vzombieContainer");
+  if(container && container.children[best]){
+    const dead = container.children[best];
+    const ghost = dead.cloneNode(true);
+    ghost.style.cssText = dead.style.cssText;
+    ghost.style.zIndex = 20;
+    ghost.style.animation = "vz-die .45s ease-in forwards";
+    container.parentNode.appendChild(ghost);
+    setTimeout(function(){ if(ghost.parentNode) ghost.parentNode.removeChild(ghost); }, 500);
+    dead.parentNode.removeChild(dead);
+  }
+  zombieSlots.splice(best,1);
+  return "kill";
+}
+
+function renderVillageZombies(){
+  const container = document.getElementById("vzombieContainer");
+  if(!container) return;
+  const count = Math.min(zombieSlots.length, ZOMBIE_MAX);
+  // 复用已有节点：僵尸挪动时能平滑过渡，且只有新增的那只弹入
+  while(container.children.length > count){
+    container.removeChild(container.lastChild);
+  }
+  for(let i=container.children.length;i<count;i++){
+    const el = document.createElement("div");
+    el.className = "vzombie show";
+    el.innerHTML = '<div class="vz-body">' + ZOMBIE_SVG + '</div>';
+    container.appendChild(el);
+  }
+  const grew = count > lastVzCount;
+  lastVzCount = count;
+  for(let i=0;i<count;i++){
+    const el = container.children[i];
+    const slot = zombieSlots[i];
+    const lane = Math.floor(slot/6);
+    const p = ZOMBIE_SLOTS[lane][slot%6];
+    if(p.left != null){ el.style.left = p.left + "px"; el.style.right = "auto"; }
+    else{ el.style.right = p.right + "px"; el.style.left = "auto"; }
+    el.style.bottom = p.bottom + "px";
+    el.style.zIndex = slot % 6;
+    el.style.width = Math.round(20 + (slot%6)*1.8) + "px";  // 越靠近房子越大
+    // 路线 1/3 的僵尸面朝左（面向房子）；每只摇晃节奏错开
+    el.firstChild.style.transform = (lane % 2 === 1) ? "scaleX(-1)" : "none";
+    el.firstChild.firstChild.style.animationDelay = (-(i*0.17)) + "s";
+    el.style.animation = (grew && i === count - 1) ? "vz-pop-in .3s ease-out" : "none";
   }
 }
 
@@ -1056,22 +1740,48 @@ function createParticles(){
   }
 }
 
-function renderZombies(){
-  const sils = dom.zombieLane.querySelectorAll(".zombie-sil");
-  for(let i=0;i<sils.length;i++){
-    sils[i].classList.toggle("on", zombieStep > i);
-  }
+function flashDanger(){
+  const flash = document.getElementById("dangerFlash");
+  if(!flash) return;
+  flash.classList.remove("on");
+  void flash.offsetWidth;
+  flash.classList.add("on");
+  setTimeout(function(){ flash.classList.remove("on"); }, 400);
+}
+function playZombieGroan(){
+  initAudio();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "sawtooth";
+  osc.frequency.setValueAtTime(110, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(70, audioCtx.currentTime + 0.35);
+  gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start();osc.stop(audioCtx.currentTime + 0.4);
+}
+function playHitSound(){
+  initAudio();
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = "square";
+  osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+  osc.frequency.exponentialRampToValueAtTime(600, audioCtx.currentTime + 0.1);
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+  gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.15);
+  osc.connect(gain);gain.connect(audioCtx.destination);
+  osc.start();osc.stop(audioCtx.currentTime + 0.15);
 }
 function lastRunSummary(){
-  const names = ["小屋","院子","守夜"];
-  const done = [];
-  const mid = [];
-  for(let i=0;i<3;i++){
-    const max = chapterMax(i);
+  const names = ["小屋","石墙","庭院","铁栏","宝塔","机关","城墙","堡垒"];
+  var done = [];
+  var mid = [];
+  for(var i=0;i<8;i++){
+    var max = chapterMax(i);
     if(build[i] >= max) done.push(names[i]);
     else if(build[i] > 0) mid.push(names[i] + " " + build[i] + "/" + max);
   }
-  let s = "上轮：";
+  var s = "上轮：";
   if(done.length) s += done.join("、") + "都齐了";
   if(mid.length) s += (done.length ? "；" : "") + mid.join("、") + "还在建";
   if(!done.length && !mid.length) s += "还没开工";
@@ -1082,7 +1792,6 @@ function lastRunSummary(){
 function refreshUI(){
   const ch = currentChar();
   dom.gemCount.innerText = gem;
-  renderZombies();
   dom.missCount.innerText = missed.length;
   dom.charBlock.innerText = ch;
   if(pinyinRevealed){
@@ -1108,6 +1817,61 @@ function refreshUI(){
     dom.progress.innerText = build[currentLevel] + "/" + chapterMax(currentLevel);
   }
   renderVillage();
+  renderWaveBar();
+  renderTurret();
+}
+function renderWaveBar(){
+  var fill = document.getElementById("waveBarFill");
+  var label = document.getElementById("waveBarLabel");
+  if(!fill || !label) return;
+  var pct = Math.min(zombieWave, 5) / 5 * 100;
+  fill.style.width = pct + "%";
+  if(zombieWave >= 5){
+    label.innerText = "👹 僵尸到家了！建造炮塔！";
+  }else{
+    label.innerText = "👹 僵尸波次 " + zombieWave + "/5";
+  }
+}
+function renderTurret(){
+  var section = document.getElementById("turretSection");
+  var row = document.getElementById("turretRow");
+  var btn = document.getElementById("btnTurret");
+  if(!section || !row || !btn) return;
+  if(zombieWave >= 5 || inReview){
+    section.classList.add("on");
+  }else{
+    section.classList.remove("on");
+  }
+  row.innerHTML = "";
+  for(var i=0;i<5;i++){
+    if(i < turretCount){
+      var built = document.createElement("div");
+      built.className = "turret-icon built";
+      row.appendChild(built);
+    }else{
+      var empty = document.createElement("div");
+      empty.className = "turret-empty";
+      row.appendChild(empty);
+    }
+  }
+  btn.disabled = turretCount >= 5 || gem < 3;
+}
+function buildTurret(){
+  if(gem < 3) return;
+  if(turretCount >= 5) return;
+  gem -= 3;
+  turretCount += 1;
+  zombieWave = Math.max(0, zombieWave - 1);
+  playDigSound();
+  saveState();
+  refreshUI();
+  if(inReview){
+    dom.tipText.innerText = "🔫 炮塔已建造！继续读对字击退僵尸！";
+  }else if(zombieWave < 5){
+    dom.tipText.innerText = "🔫 炮塔击退了僵尸！波次减少！";
+  }else{
+    dom.tipText.innerText = "🔫 炮塔已建造！再建更多击退僵尸！";
+  }
 }
 
 function setStage(){
@@ -1117,6 +1881,9 @@ function setStage(){
   applySkin();
   wordList = levels[currentLevel].words;
   if(!inReview && index >= wordList.length) index = 0;
+  zombieStep = 0;
+  zombieWave = 0;
+  turretCount = 0;
   if(!inReview){
     dom.tipText.innerText = "宝贝大声读出方块上的汉字吧！";
     dom.zombieText.innerText = "";
@@ -1141,15 +1908,15 @@ function startReview(pendingUp){
   reviewList = missed.slice();
   reviewIndex = 0;
   resumeIndex = index;
-  zombieStep = 0;
+  zombieStep = 3;
   pinyinRevealed = false;
   clearAutoNext();
   setAnswerLocked(false);
   refreshUI();
   dom.tipText.innerText = pendingLevelUp
     ? "📖 过关前先把错题再读一遍！"
-    : "👹 僵尸来了！先把读错的字再练一遍！";
-  dom.zombieText.innerText = "";
+    : "👹 僵尸围过来了！快读对，或者建炮塔！";
+  dom.zombieText.innerText = "👹 僵尸就在面前！";
   saveState();
 }
 
@@ -1185,6 +1952,9 @@ function finishReview(){
   reviewIndex = 0;
   pinyinRevealed = false;
   zombieStep = 0;
+  zombieSlots = [];
+  dom.zombieText.innerText = "";
+  dom.tipText.innerText = "宝贝大声读出方块上的汉字吧！";
   if(pending){
     goToNextLevelOrWin();
     return;
@@ -1226,15 +1996,20 @@ function answerRight(){
   addBuild();
   const justFinished = was < cap && build[currentLevel] >= cap;
   const levelUp = willLevelUpAfterThis();
+  // 击退反馈：最近的一只僵尸后退一步，退不了就被干掉
+  const zAct = zombieRetreat();
+  if(zAct){
+    playHitSound();
+  }
   zombieStep = 0;
   dom.tipText.innerText = "✅ 咔嚓！方块挖开！+1 颗绿宝石，马上进入下一个…";
-  dom.zombieText.innerText = "";
+  dom.zombieText.innerText = zAct === "kill" ? "💀 一只僵尸被干掉了！" : (zAct ? "💥 僵尸被击退了！" : "");
   createParticles();
   playDigSound();
   setTimeout(()=>playGemSound(),120);
   speakCurrent();
   saveState();
-  refreshUI();
+  setTimeout(function(){ refreshUI(); }, 500);
   autoNextTimer = setTimeout(function(){
     autoNextTimer = null;
     if(justFinished && levelUp && currentLevel < levels.length - 1){
@@ -1255,17 +2030,69 @@ function answerRight(){
 
 function answerWrong(){
   if(answered) return;
-  addMissed(currentChar());
-  zombieStep += 1;
-  dom.zombieText.innerText = "👹 汉字僵尸向前走一步！";
-  playWrongSound();
-  if(zombieStep >= 3){
-    startReview(false);
+  setAnswerLocked(true);
+  const ch = currentChar();
+  addMissed(ch);
+  let willEnterReview = false;
+  if(inReview){
+    playWrongSound();
+    playZombieGroan();
+    flashDanger();
+    zombieAction();
+    dom.tipText.innerText = "❌ 记一下，马上进入下一道错题…";
+    saveState();
+    setTimeout(function(){ refreshUI(); }, 300);
+    autoNextTimer = setTimeout(function(){
+      autoNextTimer = null;
+      nextWord();
+    }, AUTO_NEXT_MS);
     return;
   }
-  dom.tipText.innerText = "❌ 再读一次试试，一定能行！";
+  zombieStep += 1;
+  zombieAction();
+  playWrongSound();
+  playZombieGroan();
+  flashDanger();
+  if(zombieStep >= 3){
+    zombieStep = 0;
+    zombieWave += 1;
+    if(zombieWave >= 5){
+      dom.zombieText.innerText = "👹 僵尸攻到房子了！快建炮塔！";
+      dom.tipText.innerText = "📖 僵尸围住了房子！复习错字来击退！";
+      saveState();
+      refreshUI();
+      setTimeout(function(){ startReview(false); }, 800);
+      return;
+    }
+    var waveMsgs = [
+      "👹 第1波僵尸退去…但更多来了！",
+      "👹 第2波僵尸！坚持住！",
+      "👹 第3波僵尸！越来越近了！",
+      "👹 第4波僵尸！快要到房子了！"
+    ];
+    dom.zombieText.innerText = waveMsgs[Math.min(zombieWave - 1, 3)];
+    dom.tipText.innerText = "⚠️ 僵尸波次 +1！马上进入下一个字…";
+    saveState();
+    setTimeout(function(){ refreshUI(); }, 300);
+    autoNextTimer = setTimeout(function(){
+      autoNextTimer = null;
+      nextWord();
+    }, AUTO_NEXT_MS);
+    return;
+  }
+  var msgs = [
+    "👹 僵尸从远处走来了…",
+    "👹 僵尸越来越近了！",
+    "👹 僵尸就在面前！小心！"
+  ];
+  dom.zombieText.innerText = msgs[Math.min(zombieStep - 1, 2)];
+  dom.tipText.innerText = "❌ 没关系，继续下一个字…";
   saveState();
-  refreshUI();
+  setTimeout(function(){ refreshUI(); }, 300);
+  autoNextTimer = setTimeout(function(){
+    autoNextTimer = null;
+    nextWord();
+  }, AUTO_NEXT_MS);
 }
 
 function nextWord(){
@@ -1273,6 +2100,8 @@ function nextWord(){
   setAnswerLocked(false);
   pinyinRevealed = false;
   if(inReview){
+    zombieStep = 3;
+    dom.zombieText.innerText = "👹 僵尸就在面前！";
     reviewIndex += 1;
     if(reviewIndex >= reviewList.length){
       finishReview();
@@ -1307,13 +2136,15 @@ function restartGame(){
   index = 0;
   gem = 0;
   zombieStep = 0;
+  zombieWave = 0;
+  turretCount = 0;
   missed = [];
   inReview = false;
   reviewList = [];
   reviewIndex = 0;
   pendingLevelUp = false;
   pinyinRevealed = false;
-  build = [0, 0, 0];
+  build = [0,0,0,0,0,0,0,0];
   saveState();
   setStage();
   dom.tipText.innerText = "新一轮冒险开始，加油冒险者！";
@@ -1326,13 +2157,15 @@ function resetAll(){
     currentLevel = 0;
     index = 0;
     zombieStep = 0;
+    zombieWave = 0;
+    turretCount = 0;
     missed = [];
     inReview = false;
     reviewList = [];
     reviewIndex = 0;
     pendingLevelUp = false;
     pinyinRevealed = false;
-    build = [0, 0, 0];
+    build = [0,0,0,0,0,0,0,0];
     noteAfter = null;
     skipEnterModal = false;
     if(dom.noteModal) dom.noteModal.classList.remove("show");
