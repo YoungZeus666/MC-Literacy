@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>⛏️ 我的世界 · 认字生存</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+html,body{height:100%;}
+body{
+  font-family:"PingFang SC","Microsoft YaHei",sans-serif;
+  background:#0e1114;
+  color:#e8e8e8;
+  overflow-x:hidden;
+  padding-bottom:24px;
+}
+img,svg{image-rendering:pixelated;}
+.wrap{max-width:560px;margin:0 auto;padding:0 10px;}
+
+/* ===== 标题 ===== */
+.title{text-align:center;font-size:22px;font-weight:800;padding:14px 0 2px;
+  text-shadow:2px 2px 0 #000;letter-spacing:1px;}
+.subtitle{text-align:center;font-size:12px;color:#8fa095;padding-bottom:10px;}
+
+/* ===== MC 风格面板 ===== */
+.panel{
+  background:rgba(20,24,28,.92);
+  border:3px solid #565b62;
+  border-radius:6px;
+  box-shadow:inset -3px -3px 0 rgba(0,0,0,.45),inset 3px 3px 0 rgba(255,255,255,.12);
+  margin-bottom:10px;
+}
+.panel-h{
+  font-size:14px;font-weight:700;padding:7px 10px;
+  background:#3a3f46;border-bottom:2px solid #1c1f23;
+  display:flex;justify-content:space-between;align-items:center;
+  text-shadow:1px 1px 0 #000;
+}
+
+/* ===== 顶部状态 ===== */
+.top-row{display:flex;gap:8px;margin-bottom:10px;}
+.pick-box,.depth-box{flex:1;padding:8px 10px;display:flex;align-items:center;gap:8px;}
+.pick-ico{width:34px;height:34px;flex:none;}
+.pick-name{font-size:14px;font-weight:700;line-height:1.3;}
+.pick-sub{font-size:11px;color:#9fb0a4;}
+.depth-box{flex-direction:column;align-items:flex-start;justify-content:center;}
+.depth-name{font-size:14px;font-weight:700;}
+.depth-stat{font-size:11px;color:#9fb0a4;}
+
+/* ===== 资源栏 ===== */
+.mat-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;padding:9px;}
+.mat{display:flex;flex-direction:column;align-items:center;gap:3px;}
+.mcube{
+  width:26px;height:26px;border-radius:3px;
+  box-shadow:inset -3px -3px 0 rgba(0,0,0,.35),inset 3px 3px 0 rgba(255,255,255,.18);
+}
+.mat b{font-size:12px;}
+.mat span{font-size:10px;color:#93a098;}
+.m-dirt{background:#8b5a2b;}
+.m-cobble{background:#7f7f7f;}
+.m-coal{background:#262626;}
+.m-iron{background:#d8cfae;}
+.m-redstone{background:#e02020;}
+.m-lapis{background:#2250d8;}
+.m-emerald{background:#17b354;}
+.m-diamond{background:#4ae8d8;}
+.m-obsidian{background:#1a1030;}
+.m-netherite{background:#7a6a5f;}
+.pop{animation:pop .3s ease;}
+@keyframes pop{50%{transform:scale(1.35);}}
+
+/* ===== 矿洞主画面 ===== */
+.scene{
+  position:relative;
+  background:#171a1e;
+  padding:10px;
+  display:flex;align-items:flex-end;gap:8px;
+  overflow:hidden;
+}
+.scene::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 50% 30%,transparent 55%,rgba(0,0,0,.55));
+  z-index:5;
+}
+.steve-col{flex:0 0 74px;display:flex;flex-direction:column;align-items:center;position:relative;z-index:3;}
+.steve{width:72px;height:auto;}
+.steve svg{display:block;width:100%;height:auto;}
+.steve .bob{animation:bob 1.6s ease-in-out infinite;transform-origin:50% 100%;}
+@keyframes bob{50%{transform:translateY(-3px);}}
+#armFront{transform-origin:19px 16px;}
+.scene.mining #armFront{animation:swing .32s ease-in-out infinite alternate;}
+@keyframes swing{from{transform:rotate(-52deg);}to{transform:rotate(28deg);}}
+.steve-tag{font-size:10px;color:#9fb0a4;margin-top:2px;}
+
+.wall{
+  flex:1;display:grid;grid-template-columns:repeat(4,1fr);gap:4px;
+  position:relative;z-index:2;
+}
+.cell{
+  position:relative;aspect-ratio:1;cursor:pointer;
+  background:#0a0c0e;border:2px solid #050607;
+}
+.face{position:absolute;inset:0;}
+.cell.sel{outline:2px solid #fff;outline-offset:1px;z-index:4;}
+.cell.shake{animation:shake .4s;}
+@keyframes shake{
+  0%,100%{transform:translateX(0);}25%{transform:translateX(-4px);}
+  75%{transform:translateX(4px);}
+}
+
+/* ===== 方块纹理（像素风） ===== */
+.f-grass{background:
+  linear-gradient(#6aa844 0 30%,#7d5328 30%);
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,.25),inset 0 4px 0 rgba(255,255,255,.12);}
+.f-grass::before{content:"";position:absolute;left:2px;top:calc(30% - 2px);width:4px;height:4px;
+  background:#6aa844;box-shadow:7px 1px 0 #5d953c,14px -2px 0 #6aa844,21px 0 0 #558a36,
+  28px -1px 0 #6aa844,35px 1px 0 #5d953c,42px -2px 0 #6aa844;}
+.f-dirt{background:#8b5a2b;
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,.25),inset 0 4px 0 rgba(255,255,255,.1);}
+.f-dirt::before{content:"";position:absolute;width:5px;height:5px;left:6px;top:8px;background:#74481f;
+  box-shadow:16px 7px 0 #9c6a35,30px 14px 0 #6e431d,10px 26px 0 #9c6a35,34px 30px 0 #74481f;}
+.f-stone{background:#7f7f7f;
+  box-shadow:inset 0 -4px 0 rgba(0,0,0,.25),inset 0 4px 0 rgba(255,255,255,.14);}
+.f-stone::before{content:"";position:absolute;width:5px;height:5px;left:7px;top:9px;background:#6d6d6d;
+  box-shadow:18px 5px 0 #909090,34px 12px 0 #6a6a6a,12px 27px 0 #909090,32px 30px 0 #6d6d6d;}
+.f-coal{background:#7f7f7f;}
+.f-coal::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(7px 7px at 30% 35%,#262626 60%,transparent 62%),
+  radial-gradient(6px 6px at 68% 28%,#1f1f1f 60%,transparent 62%),
+  radial-gradient(7px 7px at 55% 70%,#2b2b2b 60%,transparent 62%),
+  radial-gradient(5px 5px at 22% 78%,#1f1f1f 60%,transparent 62%);}
+.f-iron{background:#7f7f7f;}
+.f-iron::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(8px 6px at 32% 32%,#d8af93 60%,transparent 62%),
+  radial-gradient(7px 6px at 70% 30%,#c79a7c 60%,transparent 62%),
+  radial-gradient(8px 6px at 50% 72%,#e0bd9e 60%,transparent 62%),
+  radial-gradient(6px 5px at 22% 76%,#c79a7c 60%,transparent 62%);}
+.f-redstone{background:#7f7f7f;}
+.f-redstone::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(7px 6px at 30% 35%,#d92027 60%,transparent 62%),
+  radial-gradient(6px 5px at 68% 28%,#ff3b3b 60%,transparent 62%),
+  radial-gradient(7px 6px at 55% 70%,#b3141c 60%,transparent 62%),
+  radial-gradient(5px 5px at 22% 78%,#ff3b3b 60%,transparent 62%);}
+.f-lapis{background:#7f7f7f;}
+.f-lapis::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(7px 6px at 30% 35%,#1f4ed8 60%,transparent 62%),
+  radial-gradient(6px 5px at 68% 28%,#3e6ef0 60%,transparent 62%),
+  radial-gradient(7px 6px at 55% 70%,#173ba8 60%,transparent 62%),
+  radial-gradient(5px 5px at 22% 78%,#3e6ef0 60%,transparent 62%);}
+.f-emerald{background:#7f7f7f;}
+.f-emerald::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(7px 6px at 30% 35%,#17b354 60%,transparent 62%),
+  radial-gradient(6px 5px at 68% 28%,#3fd97c 60%,transparent 62%),
+  radial-gradient(7px 6px at 55% 70%,#0e8a3f 60%,transparent 62%),
+  radial-gradient(5px 5px at 22% 78%,#3fd97c 60%,transparent 62%);}
+.f-diamond{background:#7f7f7f;}
+.f-diamond::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(7px 6px at 30% 35%,#4aedd9 60%,transparent 62%),
+  radial-gradient(6px 5px at 68% 28%,#9ff7ec 60%,transparent 62%),
+  radial-gradient(7px 6px at 55% 70%,#2fc3b0 60%,transparent 62%),
+  radial-gradient(5px 5px at 22% 78%,#9ff7ec 60%,transparent 62%);}
+.f-obsidian{background:#140e22;}
+.f-obsidian::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(6px 5px at 30% 30%,#3b2a5e 60%,transparent 62%),
+  radial-gradient(5px 5px at 66% 62%,#4d3578 60%,transparent 62%),
+  radial-gradient(4px 4px at 38% 78%,#2a1d47 60%,transparent 62%);}
+.f-debris{background:#2a1f1f;}
+.f-debris::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(8px 6px at 32% 34%,#a05a2c 60%,transparent 62%),
+  radial-gradient(6px 5px at 68% 30%,#c47a42 60%,transparent 62%),
+  radial-gradient(7px 6px at 52% 72%,#7e421f 60%,transparent 62%);}
+.f-bedrock{background:#4a4a4a;}
+.f-bedrock::before{content:"";position:absolute;inset:0;
+  background:
+  radial-gradient(10px 8px at 25% 30%,#2c2c2c 60%,transparent 62%),
+  radial-gradient(9px 7px at 70% 25%,#5e5e5e 60%,transparent 62%),
+  radial-gradient(10px 8px at 50% 75%,#262626 60%,transparent 62%),
+  radial-gradient(7px 6px at 20% 80%,#5e5e5e 60%,transparent 62%);}
+
+/* ===== 裂纹 ===== */
+.crack{position:absolute;inset:0;opacity:0;pointer-events:none;z-index:3;
+  background-repeat:no-repeat;background-size:100% 100%;}
+.crack.s1{opacity:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 2 L20 14 L26 24 L18 36 L22 46' stroke='%23111' stroke-width='2.4' fill='none'/></svg>");}
+.crack.s2{opacity:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 2 L20 14 L26 24 L18 36 L22 46' stroke='%23111' stroke-width='2.4' fill='none'/><path d='M20 14 L8 10 M26 24 L40 18 M18 36 L6 40' stroke='%23111' stroke-width='2' fill='none'/></svg>");}
+.crack.s3{opacity:1;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'><path d='M24 2 L20 14 L26 24 L18 36 L22 46' stroke='%23111' stroke-width='2.4' fill='none'/><path d='M20 14 L8 10 M26 24 L40 18 M18 36 L6 40 M20 14 L14 28 M26 24 L34 36' stroke='%23111' stroke-width='2' fill='none'/></svg>");}
+
+/* ===== 挖!按钮 / 提示 ===== */
+.mine-row{padding:10px;}
+.btn-mine{
+  width:100%;padding:13px;font-size:17px;font-weight:800;color:#fff;
+  background:linear-gradient(#7a8a6a,#5c6b4e);
+  border:3px solid #2c2c2c;border-radius:6px;cursor:pointer;
+  text-shadow:1px 1px 0 #000;
+  box-shadow:inset -3px -3px 0 rgba(0,0,0,.4),inset 3px 3px 0 rgba(255,255,255,.25);
+}
+.btn-mine:active{transform:translateY(2px);}
+.toast{min-height:22px;text-align:center;font-size:13px;padding:0 10px 8px;color:#ffd966;font-weight:700;}
+
+/* ===== 认字卡（弹层） ===== */
+.overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.72);
+  display:none;align-items:center;justify-content:center;z-index:30;padding:16px;
+}
+.overlay.show{display:flex;}
+.quiz-card{
+  width:100%;max-width:360px;background:#2b2f35;border:4px solid #111;border-radius:8px;
+  box-shadow:inset -4px -4px 0 rgba(0,0,0,.5),inset 4px 4px 0 rgba(255,255,255,.15),0 10px 30px rgba(0,0,0,.6);
+  animation:cardin .25s ease;
+}
+@keyframes cardin{from{transform:scale(.7);opacity:0;}}
+.quiz-top{padding:8px 12px;font-size:13px;color:#b9c4bc;border-bottom:2px solid #111;
+  display:flex;justify-content:space-between;}
+.quiz-char{
+  text-align:center;font-size:104px;font-weight:900;line-height:1.25;padding:14px 0 4px;
+  background:#3a4b35;color:#eafbe2;text-shadow:3px 3px 0 #000;font-family:"KaiTing","KaiTi",serif;
+}
+.quiz-py{text-align:center;font-size:20px;min-height:28px;color:#ffd966;padding:2px 0;}
+.quiz-aux{text-align:center;font-size:13px;color:#a9b8ae;min-height:20px;padding-bottom:8px;}
+.quiz-tools{display:flex;gap:8px;padding:0 12px 10px;}
+.mini-btn{flex:1;padding:8px;font-size:13px;font-weight:700;border-radius:5px;border:2px solid #111;cursor:pointer;color:#fff;}
+.b-speak{background:#3a5fa8;}
+.b-py{background:#b07c2a;}
+.quiz-answers{display:flex;gap:8px;padding:0 12px 14px;}
+.ans-btn{flex:1;padding:14px 6px;font-size:16px;font-weight:800;border-radius:6px;border:3px solid #111;cursor:pointer;color:#fff;text-shadow:1px 1px 0 #000;}
+.a-yes{background:linear-gradient(#5dbb42,#3e8c2a);}
+.a-no{background:linear-gradient(#e05a3a,#b3361c);}
+.ans-btn:active{transform:translateY(2px);}
+
+/* ===== 合成 / 附魔 ===== */
+.craft-list{padding:9px;display:flex;flex-direction:column;gap:7px;}
+.recipe{
+  display:flex;align-items:center;gap:9px;padding:8px;border-radius:5px;
+  background:#22262b;border:2px solid #14171a;
+}
+.recipe.owned{background:#24301f;border-color:#3e5c2a;}
+.r-ico{width:34px;height:34px;flex:none;}
+.r-info{flex:1;}
+.r-name{font-size:14px;font-weight:700;}
+.r-cost{font-size:11px;color:#a9b8ae;}
+.r-go{
+  padding:8px 12px;font-size:13px;font-weight:700;border-radius:5px;border:2px solid #111;
+  background:#6a7a56;color:#fff;cursor:pointer;
+}
+.r-go:disabled{background:#3a3d42;color:#7d858b;cursor:not-allowed;}
+.enchant-note{padding:0 10px 10px;font-size:11px;color:#93a098;}
+.foot-btns{display:flex;gap:8px;margin-top:4px;}
+.foot-btns button{flex:1;padding:10px;font-size:13px;border-radius:5px;border:2px solid #111;
+  background:#3a3f46;color:#ddd;cursor:pointer;font-weight:700;}
+
+/* ===== 通关弹窗 ===== */
+.big-modal{position:fixed;inset:0;background:rgba(0,0,0,.78);display:none;
+  align-items:center;justify-content:center;z-index:40;padding:20px;}
+.big-modal.show{display:flex;}
+.big-card{max-width:380px;width:100%;background:#2b2f35;border:4px solid #111;border-radius:8px;padding:20px;text-align:center;
+  box-shadow:inset -4px -4px 0 rgba(0,0,0,.5),inset 4px 4px 0 rgba(255,255,255,.15);}
+.big-card h2{font-size:22px;margin-bottom:10px;text-shadow:2px 2px 0 #000;}
+.big-card p{font-size:14px;color:#c3ccc6;line-height:1.7;margin-bottom:16px;}
+.big-card button{padding:12px 26px;font-size:15px;font-weight:800;border-radius:6px;border:3px solid #111;
+  background:linear-gradient(#5dbb42,#3e8c2a);color:#fff;cursor:pointer;text-shadow:1px 1px 0 #000;}
+
+/* 飞溅粒子 */
+.shard{position:absolute;width:7px;height:7px;z-index:6;pointer-events:none;}
+.fly-item{position:fixed;width:22px;height:22px;z-index:50;border-radius:3px;
+  box-shadow:inset -3px -3px 0 rgba(0,0,0,.35),inset 3px 3px 0 rgba(255,255,255,.2);
+  transition:all .55s cubic-bezier(.5,-0.2,.7,1);pointer-events:none;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="title">⛏️ 我的世界 · 认字生存</div>
+  <div class="subtitle">挖方块 · 认汉字 · 升级镐 · 通关成为挖矿大师</div>
+
+  <!-- 顶部状态 -->
+  <div class="top-row">
+    <div class="panel pick-box">
+      <div class="pick-ico" id="pickIco"></div>
+      <div>
+        <div class="pick-name" id="pickName">木镐</div>
+        <div class="pick-sub" id="pickSub">新手的第一把镐</div>
+      </div>
+    </div>
+    <div class="panel depth-box">
+      <div class="depth-name" id="depthName">🌱 地表</div>
+      <div class="depth-stat" id="depthStat">已挖 0 块 · ✅0 ❌0</div>
+    </div>
+  </div>
+
+  <!-- 资源栏 -->
+  <div class="panel">
+    <div class="panel-h">🎒 背包材料</div>
+    <div class="mat-grid" id="matGrid"></div>
+  </div>
+
+  <!-- 矿洞 -->
+  <div class="panel">
+    <div class="panel-h">🕳️ 矿洞 <span style="font-weight:400;font-size:11px;">点方块选中，再点下面的按钮开挖</span></div>
+    <div class="scene" id="scene">
+      <div class="steve-col">
+        <div class="steve" id="steveBox"></div>
+        <div class="steve-tag">史蒂夫</div>
+      </div>
+      <div class="wall" id="wall"></div>
+    </div>
+    <div class="mine-row">
+      <button class="btn-mine" id="btnMine" onclick="startMine()">⛏️ 挖这个方块！</button>
+    </div>
+    <div class="toast" id="toast">先点一个方块选中它吧！</div>
+  </div>
+
+  <!-- 合成台 -->
+  <div class="panel">
+    <div class="panel-h">🛠️ 合成台</div>
+    <div class="craft-list" id="craftList"></div>
+  </div>
+
+  <!-- 附魔台 -->
+  <div class="panel" id="enchantPanel" style="display:none;">
+    <div class="panel-h">📖 附魔台</div>
+    <div class="craft-list" id="enchantList"></div>
+    <div class="enchant-note">目标：把下界合金镐附成「满附魔」即通关！</div>
+  </div>
+
+  <div class="foot-btns">
+    <button onclick="resetAll()">🔄 重置全部进度</button>
+  </div>
+</div>
+
+<!-- 认字卡 -->
+<div class="overlay" id="quizOverlay">
+  <div class="quiz-card">
+    <div class="quiz-top">
+      <span id="quizBlock">石头</span><span>大声读出来！</span>
+    </div>
+    <div class="quiz-char" id="quizChar">人</div>
+    <div class="quiz-py" id="quizPy"></div>
+    <div class="quiz-aux" id="quizAux"></div>
+    <div class="quiz-tools">
+      <button class="mini-btn b-speak" onclick="speakQuiz()">🔊 朗读</button>
+      <button class="mini-btn b-py" onclick="revealQuizPy()">👀 看拼音</button>
+    </div>
+    <div class="quiz-answers">
+      <button class="ans-btn a-yes" onclick="answerQuiz(true)">✅ 读对啦</button>
+      <button class="ans-btn a-no" onclick="answerQuiz(false)">❌ 读错了</button>
+    </div>
+  </div>
+</div>
+
+<!-- 通关 -->
+<div class="big-modal" id="winModal">
+  <div class="big-card">
+    <h2 id="winTitle">🏆 通关啦！</h2>
+    <p id="winText"></p>
+    <button onclick="closeWin()">⛏️ 继续挖矿</button>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   字表（沿用旧版课本数据）
+============================================================ */
+const levels = [
+  { words:["人","口","手","足","山","水","日","月","天","地","风","云","雨","火","大","小","多","少","上","下","石","田","土","木","禾","左","右","来","去"] },
+  { words:["虫","一","二","三","四","五","六","七","八","九","十","百","千","万","元","角","分","年","岁","门","车","工","力","女","子","学","生","老","师"] },
+  { words:["同","朋","友","家","国","中","文","字","画","书","笔","纸","刀","尺","本","巾","伞","白","黑","高","低","开","关","出","入","飞","马","牛","羊"] },
+  { words:["鱼","鸟","花","草","树","叶","星","光","圆","方","长","短","形","冷","热","快","慢","新","旧","真","假","对","错","问","答","哥","姐","弟","妹"] },
+  { words:["爸","妈","爷","奶","耳","目","头","舌","牙","心","身","体","毛","皮","米","面","瓜","果","菜","肉","蛋","茶","糖","盐","油","吃","喝","坐","站"] },
+  { words:["打","拍","拉","推","踢","跳","游","唱","写","读","算","数","教","念","记","忘","想","爱","怕","忙","累","饿","渴","困","疼","病","药","金","银"] },
+  { words:["铜","铁","冰","雪","海","河","江","湖","林","森","园","洞","窗","墙","井","线","网","桌","椅","床","灯","路","桥","船","电","声","色","乐","好"] },
+  { words:["美","春","夏","秋","冬","早","晚","明","亮","笑","哭","走","跑","说","话","听","看","红","绿","黄","蓝","领","王","丽","安","全","叶","广","万"] }
+];
+const WORD_POOL = [];
+levels.forEach(function(lv){
+  lv.words.forEach(function(w){ if(WORD_POOL.indexOf(w) < 0) WORD_POOL.push(w); });
+});
+
+const PINYIN = {
+  "人":"rén","口":"kǒu","手":"shǒu","足":"zú","山":"shān","水":"shuǐ","日":"rì","月":"yuè",
+  "天":"tiān","地":"dì","风":"fēng","云":"yún","雨":"yǔ","火":"huǒ","石":"shí","田":"tián",
+  "土":"tǔ","木":"mù","禾":"hé","虫":"chóng","大":"dà","小":"xiǎo","多":"duō","少":"shǎo",
+  "上":"shàng","下":"xià","左":"zuò","右":"yòu","来":"lái","去":"qù",
+  "一":"yī","二":"èr","三":"sān","四":"sì","五":"wǔ","六":"liù","七":"qī","八":"bā","九":"jiǔ","十":"shí",
+  "百":"bǎi","千":"qiān","万":"wàn","元":"yuán","角":"jiǎo","分":"fēn","年":"nián","岁":"suì",
+  "门":"mén","车":"chē","工":"gōng","力":"lì","女":"nǚ","子":"zǐ","学":"xué","生":"shēng",
+  "老":"lǎo","师":"shī","同":"tóng","朋":"péng","友":"yǒu","家":"jiā","国":"guó","中":"zhōng",
+  "文":"wén","字":"zì","画":"huà","书":"shū","笔":"bǐ","纸":"zhǐ","刀":"dāo","尺":"chǐ",
+  "本":"běn","巾":"jīn","伞":"sǎn","白":"bái","黑":"hēi","高":"gāo","低":"dī",
+  "开":"kāi","关":"guān","出":"chū","入":"rù","飞":"fēi","马":"mǎ","牛":"niú","羊":"yáng",
+  "鱼":"yú","鸟":"niǎo","花":"huā","草":"cǎo","树":"shù","叶":"yè","星":"xīng","光":"guāng",
+  "圆":"yuán","方":"fāng","长":"cháng","短":"duǎn","形":"xíng","冷":"lěng","热":"rè","快":"kuài",
+  "慢":"màn","新":"xīn","旧":"jiù","真":"zhēn","假":"jiǎ","对":"duì","错":"cuò","问":"wèn",
+  "答":"dá","哥":"gē","姐":"jiě","弟":"dì","妹":"mèi","爸":"bà","妈":"mā","爷":"yé",
+  "奶":"nǎi","耳":"ěr","目":"mù","头":"tóu","舌":"shé","牙":"yá","心":"xīn","身":"shēn",
+  "体":"tǐ","毛":"máo","皮":"pí","米":"mǐ","面":"miàn","瓜":"guā","果":"guǒ","菜":"cài",
+  "肉":"ròu","蛋":"dàn","茶":"chá","糖":"táng","盐":"yán","油":"yóu","吃":"chī","喝":"hē",
+  "坐":"zuò","站":"zhàn","打":"dǎ","拍":"pāi","拉":"lā","推":"tuī","踢":"tī","跳":"tiào",
+  "游":"yóu","唱":"chàng","写":"xiě","读":"dú","算":"suàn","数":"shù","教":"jiāo","念":"niàn",
+  "记":"jì","忘":"wàng","想":"xiǎng","爱":"ài","怕":"pà","忙":"máng","累":"lèi","饿":"è",
+  "渴":"kě","困":"kùn","疼":"téng","病":"bìng","药":"yào","金":"jīn","银":"yín","铜":"tóng",
+  "铁":"tiě","冰":"bīng","雪":"xuě","海":"hǎi","河":"hé","江":"jiāng","湖":"hú","林":"lín",
+  "森":"sēn","园":"yuán","洞":"dòng","窗":"chuāng","墙":"qiáng","井":"jǐng","线":"xiàn","网":"wǎng",
+  "桌":"zhuō","椅":"yǐ","床":"chuáng","灯":"dēng","路":"lù","桥":"qiáo","船":"chuán","电":"diàn",
+  "声":"shēng","色":"sè","乐":"lè","好":"hǎo","美":"měi",
+  "春":"chūn","夏":"xià","秋":"qiū","冬":"dōng","早":"zǎo","晚":"wǎn","明":"míng","亮":"liàng",
+  "笑":"xiào","哭":"kū","走":"zǒu","跑":"pǎo","说":"shuō","话":"huà","听":"tīng","看":"kàn",
+  "红":"hóng","绿":"lǜ","黄":"huáng","蓝":"lán","领":"lǐng","王":"wáng","丽":"lì","安":"ān",
+  "全":"quán","广":"guǎng"
+};
+const COMPOUND = {
+  "人":"大人","口":"口渴","手":"洗手","足":"足球","山":"大山","水":"喝水","日":"日出","月":"月亮",
+  "天":"天空","地":"土地","风":"大风","云":"白云","雨":"下雨","火":"火车","石":"石头","田":"田地",
+  "土":"土地","木":"树木","禾":"禾苗","虫":"虫子","大":"大门","小":"小朋友","多":"多少","少":"多少",
+  "上":"上面","下":"下面","左":"左边","右":"右边","来":"过来","去":"回去",
+  "一":"一个","二":"二月","三":"三月","四":"四月","五":"五月","六":"六月","七":"七月","八":"八月","九":"九月","十":"十月",
+  "百":"一百","千":"一千","万":"一万","元":"一元","角":"一角","分":"一分","年":"今年","岁":"几岁",
+  "门":"开门","车":"汽车","工":"工人","力":"力气","女":"女生","子":"孩子","学":"学习","生":"生日",
+  "老":"老师","师":"老师","同":"同学","朋":"朋友","友":"朋友","家":"回家","国":"中国","中":"中间",
+  "文":"中文","字":"汉字","画":"画画","书":"书本","笔":"铅笔","纸":"白纸","刀":"小刀","尺":"尺子",
+  "本":"本子","巾":"毛巾","伞":"雨伞","白":"白云","黑":"黑色","高":"高山","低":"低头",
+  "开":"开门","关":"关门","出":"出门","入":"进入","飞":"飞机","马":"马车","牛":"牛奶","羊":"小羊",
+  "鱼":"小鱼","鸟":"小鸟","花":"花朵","草":"小草","树":"大树","叶":"叶子","星":"星星","光":"阳光",
+  "圆":"圆形","方":"方形","长":"很长","短":"很短","形":"形状","冷":"很冷","热":"很热","快":"很快",
+  "慢":"很慢","新":"新的","旧":"旧的","真":"真的","假":"假的","对":"对的","错":"错的","问":"问题",
+  "答":"回答","哥":"哥哥","姐":"姐姐","弟":"弟弟","妹":"妹妹","爸":"爸爸","妈":"妈妈","爷":"爷爷",
+  "奶":"奶奶","耳":"耳朵","目":"目光","头":"头发","舌":"舌头","牙":"牙齿","心":"开心","身":"身体",
+  "体":"身体","毛":"毛衣","皮":"皮肤","米":"大米","面":"面条","瓜":"西瓜","果":"水果","菜":"白菜",
+  "肉":"牛肉","蛋":"鸡蛋","茶":"喝茶","糖":"白糖","盐":"食盐","油":"加油","吃":"吃饭","喝":"喝水",
+  "坐":"坐下","站":"站立","打":"打球","拍":"拍手","拉":"拉手","推":"推开","踢":"踢球","跳":"跳高",
+  "游":"游泳","唱":"唱歌","写":"写字","读":"读书","算":"算数","数":"数学","教":"教师","念":"念书",
+  "记":"记住","忘":"忘记","想":"想念","爱":"爱心","怕":"害怕","忙":"很忙","累":"很累","饿":"饿了",
+  "渴":"口渴","困":"困了","疼":"头疼","病":"生病","药":"吃药","金":"金子","银":"银子","铜":"铜钱",
+  "铁":"钢铁","冰":"冰块","雪":"下雪","海":"大海","河":"小河","江":"长江","湖":"湖水","林":"树林",
+  "森":"森林","园":"花园","洞":"山洞","窗":"窗户","墙":"墙壁","井":"水井","线":"线条","网":"上网",
+  "桌":"桌子","椅":"椅子","床":"床上","灯":"灯光","路":"马路","桥":"小桥","船":"小船","电":"电话",
+  "声":"声音","色":"颜色","乐":"快乐","好":"好的","美":"美丽",
+  "春":"春天","夏":"夏天","秋":"秋天","冬":"冬天","早":"早上","晚":"晚上","明":"明天","亮":"明亮",
+  "笑":"笑脸","哭":"哭泣","走":"走路","跑":"跑步","说":"说话","话":"说话","听":"听话","看":"看见",
+  "红":"红色","绿":"绿色","黄":"黄色","蓝":"蓝色","领":"领导","王":"国王","丽":"美丽","安":"安全",
+  "全":"全部","广":"广场"
+};
+
+/* ============================================================
+   方块 / 镐 / 合成 数据
+============================================================ */
+// tier: 需要的镐等级；木0 石1 铁2 钻石3
+const BLOCKS = {
+  grass:    {name:"草方块",  mat:"dirt",      tier:0},
+  dirt:     {name:"泥土",    mat:"dirt",      tier:0},
+  stone:    {name:"石头",    mat:"cobble",    tier:0},
+  coal:     {name:"煤矿",    mat:"coal",      tier:1},
+  iron:     {name:"铁矿",    mat:"iron",      tier:1},
+  redstone: {name:"红石矿",  mat:"redstone",  tier:2},
+  lapis:    {name:"青金石矿",mat:"lapis",     tier:2},
+  emerald:  {name:"绿宝石矿",mat:"emerald",   tier:2},
+  diamond:  {name:"钻石矿",  mat:"diamond",   tier:2},
+  obsidian: {name:"黑曜石",  mat:"obsidian",  tier:3},
+  debris:   {name:"远古残骸",mat:"netherite", tier:3},
+  bedrock:  {name:"基岩",    mat:null,        tier:99}
+};
+const MATERIALS = [
+  {id:"dirt",      name:"泥土"},
+  {id:"cobble",    name:"圆石"},
+  {id:"coal",      name:"煤炭"},
+  {id:"iron",      name:"铁锭"},
+  {id:"redstone",  name:"红石"},
+  {id:"lapis",     name:"青金石"},
+  {id:"emerald",   name:"绿宝石"},
+  {id:"diamond",   name:"钻石"},
+  {id:"obsidian",  name:"黑曜石"},
+  {id:"netherite", name:"合金锭"}
+];
+const PICKAXES = [
+  {name:"木镐",        sub:"新手的第一把镐",   cost:{}},
+  {name:"石镐",        sub:"能挖煤和铁",       cost:{cobble:3}},
+  {name:"铁镐",        sub:"能挖各种宝石矿",   cost:{iron:3}},
+  {name:"钻石镐",      sub:"能挖黑曜石",       cost:{diamond:3}},
+  {name:"下界合金镐",  sub:"最顶级的镐",       cost:{netherite:1}}
+];
+
+/* ============================================================
+   游戏状态
+============================================================ */
+let pickIdx = 0;       // 当前镐
+let enchanted = false;
+let hasTable = false;
+let inv = {};
+MATERIALS.forEach(function(m){ inv[m.id] = 0; });
+let mined = 0;          // 挖掉的方块总数
+let rightN = 0, wrongN = 0;
+let depth = 0;
+
+const CELLS_N = 12;     // 4×3
+let gridTypes = [];     // 每格的方块 id
+let selCell = -1;
+let miningTimers = [];
+let miningCell = -1;
+let quizChar = "";
+
+/* ============================================================
+   存档
+============================================================ */
+const STORAGE_KEY = "mc_survival_v3";
+function saveState(){
+  try{
+    localStorage.setItem(STORAGE_KEY, JSON.stringify({
+      pickIdx:pickIdx, enchanted:enchanted, hasTable:hasTable,
+      inv:inv, mined:mined, rightN:rightN, wrongN:wrongN
+    }));
+  }catch(e){}
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if(!raw) return;
+    const s = JSON.parse(raw);
+    if(typeof s.pickIdx === "number" && s.pickIdx >= 0 && s.pickIdx < PICKAXES.length) pickIdx = s.pickIdx;
+    enchanted = !!s.enchanted;
+    hasTable = !!s.hasTable;
+    if(s.inv){
+      MATERIALS.forEach(function(m){
+        if(typeof s.inv[m.id] === "number") inv[m.id] = s.inv[m.id];
+      });
+    }
+    mined = s.mined|0; rightN = s.rightN|0; wrongN = s.wrongN|0;
+  }catch(e){}
+}
+
+/* ============================================================
+   世界生成（按深度决定方块概率）
+============================================================ */
+function genBlock(d){
+  const r = Math.random();
+  const pick = function(table){       // table: [[概率,方块]...]
+    let acc = 0;
+    for(let i=0;i<table.length;i++){
+      acc += table[i][0];
+      if(r < acc) return table[i][1];
+    }
+    return table[table.length-1][1];
+  };
+  if(d === 0) return pick([[.7,"grass"],[.3,"dirt"]]);
+  if(d <= 2) return pick([[.55,"dirt"],[.42,"stone"],[.03,"coal"]]);
+  if(d <= 6) return pick([[.72,"stone"],[.22,"coal"],[.06,"iron"]]);
+  if(d <= 10) return pick([[.5,"stone"],[.2,"coal"],[.2,"iron"],[.06,"redstone"],[.04,"lapis"]]);
+  if(d <= 13) return pick([[.34,"stone"],[.14,"coal"],[.2,"iron"],[.16,"redstone"],[.16,"lapis"]]);
+  if(d <= 17) return pick([[.24,"stone"],[.1,"iron"],[.12,"redstone"],[.1,"lapis"],[.2,"emerald"],[.22,"diamond"]]);
+  // 最深层：黑曜石、远古残骸，同时保留少量所有宝石，保证材料永远能补齐
+  return pick([[.28,"obsidian"],[.12,"debris"],[.1,"diamond"],[.08,"emerald"],
+    [.1,"lapis"],[.1,"redstone"],[.1,"stone"],[.12,"iron"]]);
+}
+function regenCell(i){
+  const bedCount = gridTypes.filter(function(t){ return t === "bedrock"; }).length;
+  let t = genBlock(depth);
+  // 通关后深层才有少量基岩，且一屏最多 5 块，避免挖无可挖
+  if(enchanted && depth >= 18 && t === "stone" && bedCount < 5 && Math.random() < .25){
+    t = "bedrock";
+  }
+  gridTypes[i] = t;
+}
+function depthNameOf(d){
+  if(d === 0) return "🌱 地表";
+  if(d <= 2) return "🟫 泥土层";
+  if(d <= 6) return "⬜ 浅层矿洞";
+  if(d <= 10) return "⛏️ 铁矿层";
+  if(d <= 13) return "🔵 深层矿洞";
+  if(d <= 17) return "💎 宝石层";
+  return "🖤 黑曜石层";
+}
+
+/* ============================================================
+   SVG：史蒂夫（像素风），手持镐
+============================================================ */
+function steveSVG(){
+  // 镐头颜色随当前镐变化
+  const headCol = ["#9c7a4a","#7f7f7f","#d8cfae","#4ae8d8","#7a6a5f"][pickIdx];
+  const glow = enchanted ? '<rect x="20" y="3" width="3" height="3" fill="#ffe08a"/><rect x="28" y="5" width="2" height="2" fill="#a0ff90"/>' : "";
+  return '<svg viewBox="0 0 40 48" xmlns="http://www.w3.org/2000/svg"><g class="bob">'
+  // 后腿
+  +'<rect x="14" y="30" width="6" height="13" fill="#2f3590"/>'
+  +'<rect x="20" y="30" width="6" height="13" fill="#3a42a8"/>'
+  +'<rect x="13" y="42" width="8" height="4" fill="#5a5a5a"/>'
+  +'<rect x="20" y="42" width="8" height="4" fill="#6a6a6a"/>'
+  // 后臂
+  +'<rect x="9" y="17" width="5" height="12" fill="#2aa8a8"/>'
+  +'<rect x="9" y="28" width="5" height="4" fill="#b5825a"/>'
+  // 身体
+  +'<rect x="13" y="16" width="14" height="15" fill="#28b8b8"/>'
+  +'<rect x="13" y="28" width="14" height="3" fill="#1d8e8e"/>'
+  // 头
+  +'<rect x="12" y="3" width="16" height="14" fill="#b5825a"/>'
+  +'<rect x="12" y="3" width="16" height="4" fill="#3b2a1c"/>'
+  +'<rect x="12" y="7" width="3" height="6" fill="#3b2a1c"/>'
+  +'<rect x="25" y="7" width="3" height="5" fill="#3b2a1c"/>'
+  +'<rect x="16" y="9" width="3" height="3" fill="#fff"/><rect x="17" y="10" width="2" height="2" fill="#4a30c8"/>'
+  +'<rect x="22" y="9" width="3" height="3" fill="#fff"/><rect x="22" y="10" width="2" height="2" fill="#4a30c8"/>'
+  +'<rect x="18" y="14" width="4" height="1" fill="#7a4a30"/>'
+  // 前臂 + 镐（可挥）
+  +'<g id="armFront"><rect x="24" y="17" width="5" height="11" fill="#36c8c8"/>'
+  +'<rect x="24" y="26" width="5" height="4" fill="#c4906a"/>'
+  +'<rect x="26" y="4" width="2.4" height="26" fill="#7a5230"/>'
+  +'<rect x="20" y="3" width="14" height="3.6" fill="'+headCol+'"/>'
+  +'<rect x="20" y="6.4" width="4" height="2" fill="'+headCol+'"/>'
+  + glow
+  +'</g></g></svg>';
+}
+
+/* ============================================================
+   渲染
+============================================================ */
+function renderMatBar(){
+  const grid = document.getElementById("matGrid");
+  grid.innerHTML = MATERIALS.map(function(m){
+    return '<div class="mat"><div class="mcube m-'+m.id+'" id="cube-'+m.id+'"></div>'
+      +'<b id="cnt-'+m.id+'">'+inv[m.id]+'</b><span>'+m.name+'</span></div>';
+  }).join("");
+}
+function renderWall(){
+  const wall = document.getElementById("wall");
+  wall.innerHTML = gridTypes.map(function(t,i){
+    return '<div class="cell'+(i===selCell?" sel":"")+'" onclick="selectCell('+i+')">'
+      +'<div class="face f-'+t+'"></div><div class="crack" id="crack-'+i+'"></div></div>';
+  }).join("");
+}
+function renderTop(){
+  const pk = PICKAXES[pickIdx];
+  document.getElementById("pickName").innerText = (enchanted ? "⭐满附魔·" : "") + pk.name;
+  document.getElementById("pickSub").innerText = enchanted ? "挖矿飞快！" : pk.sub;
+  document.getElementById("pickIco").innerHTML = steveSVG();
+  document.getElementById("steveBox").innerHTML = steveSVG();
+  document.getElementById("depthName").innerText = depthNameOf(depth);
+  document.getElementById("depthStat").innerText =
+    "已挖 "+mined+" 块 · ✅"+rightN+" ❌"+wrongN;
+}
+function costText(cost){
+  const parts = [];
+  Object.keys(cost).forEach(function(k){
+    const m = MATERIALS.find(function(x){return x.id===k;});
+    parts.push((m?m.name:k)+"×"+cost[k]);
+  });
+  return parts.length ? parts.join("，") : "开局自带";
+}
+function canAfford(cost){
+  return Object.keys(cost).every(function(k){ return (inv[k]|0) >= cost[k]; });
+}
+function pay(cost){
+  Object.keys(cost).forEach(function(k){ inv[k] -= cost[k]; });
+}
+function renderCraft(){
+  document.getElementById("craftList").innerHTML = PICKAXES.map(function(pk,i){
+    const owned = i <= pickIdx;
+    const isNext = i === pickIdx + 1;
+    const afford = isNext && canAfford(pk.cost);
+    return '<div class="recipe'+(owned?" owned":"")+'">'
+      +'<div class="r-ico mcube '+(i===0?"m-dirt":"")+'" style="background:'+["#9c7a4a","#7f7f7f","#d8cfae","#4ae8d8","#7a6a5f"][i]+'"></div>'
+      +'<div class="r-info"><div class="r-name">'+pk.name+(i===pickIdx&&enchanted?"（已满附魔）":"")+'</div>'
+      +'<div class="r-cost">'+costText(pk.cost)+'</div></div>'
+      +(owned
+        ? '<button class="r-go" disabled>'+(i===pickIdx?"使用中":"已拥有")+'</button>'
+        : '<button class="r-go" '+(afford?"":"disabled")+' onclick="craftPick('+i+')">合成</button>')
+      +'</div>';
+  }).join("");
+
+  // 附魔面板（钻石镐起出现）
+  const panel = document.getElementById("enchantPanel");
+  panel.style.display = pickIdx >= 3 ? "block" : "none";
+  const enchantRecipes = [
+    {key:"table", name:"制作附魔台", cost:{obsidian:4,diamond:2}, done:hasTable},
+    {key:"enchant", name:"满级附魔（最终目标）", cost:{lapis:3,diamond:5,emerald:5}, done:enchanted}
+  ];
+  document.getElementById("enchantList").innerHTML = enchantRecipes.map(function(r){
+    const ok = (r.key==="table" ? canAfford(r.cost)
+      : (hasTable && pickIdx === 4 && canAfford(r.cost)));
+    return '<div class="recipe'+(r.done?" owned":"")+'">'
+      +'<div class="r-ico mcube" style="background:'+(r.key==="table"?"#5a3a8a":"#ffd966")+'"></div>'
+      +'<div class="r-info"><div class="r-name">'+r.name+'</div>'
+      +'<div class="r-cost">'+costText(r.cost)+'</div></div>'
+      +(r.done ? '<button class="r-go" disabled>已完成</button>'
+        : '<button class="r-go" '+(ok?"":"disabled")+' onclick="doEnchant(\''+r.key+'\')">制作</button>')
+      +'</div>';
+  }).join("");
+}
+function refreshAll(){
+  renderTop(); renderCraft();
+}
+
+/* ============================================================
+   交互：选方块 / 挖
+============================================================ */
+function selectCell(i){
+  cancelMining();
+  selCell = i;
+  document.querySelectorAll(".cell").forEach(function(el,idx){
+    el.classList.toggle("sel", idx === i);
+  });
+  setToast("选中了「"+BLOCKS[gridTypes[i]].name+"」，点下面按钮开挖！");
+}
+function setToast(t){ document.getElementById("toast").innerText = t; }
+
+function cancelMining(){
+  miningTimers.forEach(function(t){ clearTimeout(t); });
+  miningTimers = [];
+  miningCell = -1;
+  document.getElementById("scene").classList.remove("mining");
+  document.querySelectorAll(".crack").forEach(function(c){
+    c.className = "crack";
+  });
+}
+
+const NEED_NAME = ["木镐","石镐","铁镐","钻石镐"];
+
+function startMine(){
+  if(selCell < 0){ setToast("先点一个方块选中它吧！"); return; }
+  if(miningCell === selCell) return;
+  cancelMining();
+  const type = gridTypes[selCell];
+  const blk = BLOCKS[type];
+  // 基岩
+  if(type === "bedrock"){
+    shakeSel("⛏️ 基岩挖不动！");
+    return;
+  }
+  // 镐等级不够
+  if(pickIdx < blk.tier){
+    shakeSel("🔒 需要"+NEED_NAME[blk.tier]+"才能挖「"+blk.name+"」！");
+    return;
+  }
+  // 开始挖：裂纹分 3 级，满附魔幻更快
+  const gap = enchanted ? 200 : 360;
+  miningCell = selCell;
+  document.getElementById("scene").classList.add("mining");
+  playDigSound();
+  const crack = document.getElementById("crack-"+selCell);
+  [1,2,3].forEach(function(s,k){
+    miningTimers.push(setTimeout(function(){
+      if(miningCell !== selCell) return;
+      if(s < 3){
+        crack.className = "crack s"+s;
+        playDigSound();
+      }else{
+        openQuiz(selCell, type);
+      }
+    }, gap*(k+1)));
+  });
+}
+function shakeSel(msg){
+  const cell = document.querySelectorAll(".cell")[selCell];
+  if(cell){
+    cell.classList.add("shake");
+    setTimeout(function(){ cell.classList.remove("shake"); }, 420);
+  }
+  playHitSound();
+  setToast(msg);
+}
+
+/* ============================================================
+   认字卡
+============================================================ */
+let lastQuizChar = "";
+function openQuiz(cellIdx, type){
+  document.getElementById("scene").classList.remove("mining");
+  miningCell = -1;
+  // 从课本字表抽一个与上一次不同的字
+  let ch;
+  do{ ch = WORD_POOL[Math.floor(Math.random()*WORD_POOL.length)]; }
+  while(ch === lastQuizChar && WORD_POOL.length > 1);
+  lastQuizChar = ch;
+  quizChar = ch;
+  quizCell = cellIdx;
+  document.getElementById("quizBlock").innerText = BLOCKS[type].name;
+  document.getElementById("quizChar").innerText = ch;
+  document.getElementById("quizPy").innerText = "";
+  document.getElementById("quizAux").innerText = "";
+  document.getElementById("quizOverlay").classList.add("show");
+  speakChar(ch);
+}
+let quizCell = -1;
+
+function speakQuiz(){ speakChar(quizChar); }
+function speakChar(ch){
+  if(!window.speechSynthesis) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(ch);
+  u.lang = "zh-CN"; u.rate = 0.7;
+  setTimeout(function(){ speechSynthesis.speak(u); }, 50);
+}
+function revealQuizPy(){
+  document.getElementById("quizPy").innerText = PINYIN[quizChar] || "";
+  document.getElementById("quizAux").innerText = "组词：" + (COMPOUND[quizChar] || "");
+}
+function answerQuiz(yes){
+  const type = gridTypes[quizCell];
+  document.getElementById("quizOverlay").classList.remove("show");
+  if(yes){
+    rightN++;
+    breakBlock(quizCell, type);
+  }else{
+    wrongN++;
+    const crack = document.getElementById("crack-"+quizCell);
+    if(crack) crack.className = "crack";
+    setToast("❌ 没关系！再挖一次，会换一个字哦～");
+    playHitSound();
+    saveState();
+    refreshAll();
+  }
+}
+
+/* ============================================================
+   方块碎裂 / 掉落 / 深度推进
+============================================================ */
+function breakBlock(cellIdx, type){
+  const blk = BLOCKS[type];
+  const cell = document.querySelectorAll(".cell")[cellIdx];
+  // 碎裂粒子
+  if(cell) burst(cell, type);
+  // 掉落物飞入背包
+  const mat = blk.mat;
+  if(mat && cell){
+    flyToInventory(cell, mat);
+  }
+  mined++;
+  const newDepth = Math.min(22, Math.floor(mined/8));
+  const deeper = newDepth > depth;
+  depth = newDepth;
+  // 生成新方块
+  regenCell(cellIdx);
+  setTimeout(function(){
+    renderWall();
+    if(selCell === cellIdx){
+      // 保持选中新方块
+      const el = document.querySelectorAll(".cell")[cellIdx];
+      if(el) el.classList.add("sel");
+    }
+  }, 180);
+  setToast("✅ 真棒！挖掉了「"+blk.name+"」"+(mat?"获得材料！":"")+(deeper?" ⬇️ 挖到更深一层了！":""));
+  playGemSound();
+  saveState();
+  refreshAll();
+}
+function burst(cell, type){
+  const rect = cell.getBoundingClientRect();
+  const colors = {
+    grass:["#6aa844","#8b5a2b"],dirt:["#8b5a2b","#a06a3a"],
+    stone:["#7f7f7f","#9a9a9a"],coal:["#262626","#7f7f7f"],
+    iron:["#d8af93","#7f7f7f"],redstone:["#d92027","#7f7f7f"],
+    lapis:["#1f4ed8","#7f7f7f"],emerald:["#17b354","#7f7f7f"],
+    diamond:["#4aedd9","#7f7f7f"],obsidian:["#3b2a5e","#140e22"],
+    debris:["#a05a2c","#2a1f1f"],bedrock:["#4a4a4a","#262626"]
+  }[type] || ["#888","#aaa"];
+  for(let i=0;i<10;i++){
+    const s = document.createElement("div");
+    s.className = "shard";
+    s.style.background = colors[i%2];
+    s.style.left = (rect.left + rect.width/2 - 3) + "px";
+    s.style.top = (rect.top + rect.height/2 - 3) + "px";
+    s.style.position = "fixed";
+    document.body.appendChild(s);
+    const dx = (Math.random()-0.5)*90, dy = -30 - Math.random()*60;
+    setTimeout(function(){
+      s.style.transition = "transform .5s ease-out, opacity .5s";
+      s.style.transform = "translate("+dx+"px,"+dy+"px) rotate(180deg)";
+      s.style.opacity = "0";
+    }, 10);
+    setTimeout(function(){ if(s.parentNode) s.parentNode.removeChild(s); }, 560);
+  }
+}
+function flyToInventory(cell, mat){
+  const from = cell.getBoundingClientRect();
+  const target = document.getElementById("cube-"+mat);
+  if(!target){ inv[mat]++; renderMatBar(); return; }
+  inv[mat]++;
+  const to = target.getBoundingClientRect();
+  const f = document.createElement("div");
+  f.className = "fly-item m-"+mat;
+  f.style.left = (from.left + from.width/2 - 11) + "px";
+  f.style.top = (from.top + from.height/2 - 11) + "px";
+  document.body.appendChild(f);
+  setTimeout(function(){
+    f.style.left = (to.left + to.width/2 - 11) + "px";
+    f.style.top = (to.top + to.height/2 - 11) + "px";
+    f.style.width = "26px"; f.style.height = "26px";
+  }, 20);
+  setTimeout(function(){
+    if(f.parentNode) f.parentNode.removeChild(f);
+    const cnt = document.getElementById("cnt-"+mat);
+    if(cnt){ cnt.innerText = inv[mat]; cnt.classList.remove("pop"); void cnt.offsetWidth; cnt.classList.add("pop"); }
+  }, 600);
+}
+
+/* ============================================================
+   合成 / 附魔
+============================================================ */
+function craftPick(i){
+  if(i !== pickIdx + 1) return;
+  const pk = PICKAXES[i];
+  if(!canAfford(pk.cost)) return;
+  pay(pk.cost);
+  pickIdx = i;
+  playCraftSound();
+  setToast("🛠️ 合成了「"+pk.name+"」！");
+  saveState();
+  refreshAll();
+}
+function doEnchant(key){
+  if(key === "table"){
+    const cost = {obsidian:4,diamond:2};
+    if(!canAfford(cost)) return;
+    pay(cost); hasTable = true;
+    setToast("📖 附魔台做好了！再做出下界合金镐就能满级附魔！");
+  }else{
+    if(!hasTable || pickIdx !== 4) return;
+    const cost = {lapis:3,diamond:5,emerald:5};
+    if(!canAfford(cost)) return;
+    pay(cost); enchanted = true;
+    showWin();
+  }
+  playCraftSound();
+  saveState();
+  refreshAll();
+}
+
+/* ============================================================
+   通关
+============================================================ */
+function showWin(){
+  document.getElementById("winTitle").innerText = "🏆 通关啦！挖矿大师！";
+  document.getElementById("winText").innerText =
+    "你做出了「满附魔下界合金镐」！\n一共挖了 "+mined+" 块方块，\n读对 "+rightN+" 次，读错 "+wrongN+" 次。\n你已经是认字小达人啦！";
+  document.getElementById("winModal").classList.add("show");
+}
+function closeWin(){ document.getElementById("winModal").classList.remove("show"); }
+
+/* ============================================================
+   重置
+============================================================ */
+function resetAll(){
+  if(!confirm("确定重置全部进度吗？要重新从木镐开始哦！")) return;
+  localStorage.removeItem(STORAGE_KEY);
+  location.reload();
+}
+
+/* ============================================================
+   音效（Web Audio 合成）
+============================================================ */
+let actx;
+function ainit(){
+  if(!actx) actx = new (window.AudioContext || window.webkitAudioContext)();
+}
+function tone(freq, dur, type, vol, when){
+  ainit();
+  const o = actx.createOscillator();
+  const g = actx.createGain();
+  o.type = type || "square";
+  o.frequency.value = freq;
+  const t = actx.currentTime + (when||0);
+  g.gain.setValueAtTime(vol||.12, t);
+  g.gain.exponentialRampToValueAtTime(.001, t + dur);
+  o.connect(g); g.connect(actx.destination);
+  o.start(t); o.stop(t + dur);
+}
+function playDigSound(){
+  ainit();
+  const o = actx.createOscillator();
+  const g = actx.createGain();
+  o.type = "square";
+  o.frequency.setValueAtTime(150, actx.currentTime);
+  o.frequency.exponentialRampToValueAtTime(70, actx.currentTime + .12);
+  g.gain.setValueAtTime(.14, actx.currentTime);
+  g.gain.exponentialRampToValueAtTime(.001, actx.currentTime + .14);
+  o.connect(g); g.connect(actx.destination);
+  o.start(); o.stop(actx.currentTime + .15);
+}
+function playHitSound(){ tone(110,.18,"sawtooth",.14); }
+function playGemSound(){
+  tone(660,.12,"triangle",.15,0);
+  tone(990,.18,"triangle",.14,.09);
+}
+function playCraftSound(){
+  tone(523,.12,"triangle",.14,0);
+  tone(784,.2,"triangle",.14,.1);
+}
+
+/* ============================================================
+   初始化
+============================================================ */
+function init(){
+  loadState();
+  // 初始 12 格：按初始深度生成
+  gridTypes = [];
+  for(let i=0;i<CELLS_N;i++){
+    gridTypes.push(genBlock(depth));
+  }
+  renderMatBar();
+  renderWall();
+  refreshAll();
+}
+init();
+</script>
+</body>
+</html>
